@@ -5,22 +5,20 @@ import dev.janheist.newsaddon.main.NewsAddon;
 import dev.janheist.newsaddon.modules.WerbeCounter120;
 import dev.janheist.newsaddon.modules.WerbeCounter90;
 import net.labymod.api.events.MessageReceiveEvent;
-import net.labymod.main.LabyMod;
 
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 
-public class onReceive implements MessageReceiveEvent {
-    PlayerUtilities pUtils = new PlayerUtilities();
+public class onReceiver implements MessageReceiveEvent {
     NewsAddon newsAddon;
-    public onReceive(NewsAddon newsAddon) {
+    public onReceiver(NewsAddon newsAddon) {
         this.newsAddon = newsAddon;
     }
+    PlayerUtilities pUtils = new PlayerUtilities();
 
     @Override
     public boolean onReceive(String s, String msg) {
-        pUtils.displayNormal(s);
         if(msg.contains("------------- ***** WERBUNG ***** -------------")) {
             newsAddon.resetSeconds();
             WerbeCounter90.allowed = 0;

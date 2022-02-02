@@ -1,10 +1,16 @@
 package dev.janheist.newsaddon.features;
 
+import dev.janheist.newsaddon.main.NewsAddon;
+
 public class NewsAddonCommand {
 
     PlayerUtilities pUtils = new PlayerUtilities();
+    NewsAddon newsAddon;
+    public NewsAddonCommand(NewsAddon newsAddon) {
+        this.newsAddon = newsAddon;
+    }
 
-    public void init(String message) {
+    public void init(String message) throws NullPointerException {
         String[] args = message.split(" ");
         if(args[1].startsWith("hv") && !args[1].equals("hv2")) {
             pUtils.displayPrefix("§8§l---*--- §cGERMAN§6MINER§8-§aNEWS§8-§l§oAddon§r§8§l ---*---");
@@ -45,7 +51,7 @@ public class NewsAddonCommand {
             pUtils.displayPrefix("§e§oIllegal §7»§r §cDrogen: Hanfsamen, Ecstasy, Tilidin");
         } else if(args[1].equals("warn")) {
             if(!(args.length > 2)) {
-                pUtils.displayPrefix("§e/warn [pvp1,pvp2,pvp3,hv1,hv2,hv3,1,2,3]");
+                pUtils.displayPrefix("§e/newsaddon warn [pvp1,pvp2,pvp3,hv1,hv2,hv3,1,2,3]");
             } else {
                 switch (args[2]) {
                     case "pvp1":
@@ -76,9 +82,29 @@ public class NewsAddonCommand {
                 }
 
             }
+        } else if(args[1].equals("scan") || args[1].equals("scanner")) {
+            if(!(args.length > 2)) {
+                pUtils.displayPrefix("§e/newsaddon scan [Name,stop]");
+            } else {
+                if(args[2].equals("stop")) {
+                    newsAddon.scan_name = null;
+                    newsAddon.scanner = false;
+                    pUtils.displayPrefix("§cScanner aus");
+                } else {
+                    newsAddon.scan_name = args[2];
+                    newsAddon.scanner = true;
+                    pUtils.displayPrefix("§aScanne nun " + args[2]);
+                }
+            }
+        } else if(args[1].equals("da") || args[1].startsWith("dauerauftr")) {
+            pUtils.displayPrefix("§aFolgende DAs sind für heute abgespeichert:");
+            for(String item : newsAddon.das) {
+                pUtils.displayPrefix("§a" + item);
+            }
+            pUtils.displayPrefix("");
         } else {
             pUtils.displayPrefix("");
-            pUtils.displayPrefix("§e/newsaddon §e[help, hv1, hv2, illegal, warn]");
+            pUtils.displayPrefix("§e/newsaddon §e[help, hv1, hv2, illegal, warn, scan]");
             pUtils.displayPrefix("§e/auktion [item, code, gs, mie, auto]");
             pUtils.displayPrefix("");
         }

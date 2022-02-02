@@ -15,3 +15,5 @@ gradle-app.setting
 
 out/
 eclipse/
+/out/
+/eclipse/

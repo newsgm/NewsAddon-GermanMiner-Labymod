@@ -84,6 +84,8 @@ public class Auktionen {
             case "gutschein":
             case "code":
                 doAuction(codeTexte);
+                pUtils.displayPrefix("§aDie Person muss den Code per Forenkonversation an dich und die Fraktionsleitung senden." +
+                        "Weiterhin muss noch ein Vertrag erstellt werden.");
                 break;
             case "gs":
             case "grundstück":
@@ -93,14 +95,17 @@ public class Auktionen {
             case "mie":
             case "werbetafel":
                 doAuction(gsTexte);
+                pUtils.displayPrefix("§aDie Person muss noch einen Vertrag unterschreiben.");
                 break;
             case "vehicle":
             case "auto":
             case "car":
                 doAuction(autoTexte);
+                pUtils.displayPrefix("§aDie Person muss noch einen Vertrag unterschreiben.");
                 break;
             case "biz":
                 doAuction(bizTexte);
+                pUtils.displayPrefix("§aDie Person muss noch einen Vertrag unterschreiben.");
                 break;
             default:
                 pUtils.displayPrefix("§cKorrekte Anwendung: §e/auktion [item, code, gs, mie, auto]");

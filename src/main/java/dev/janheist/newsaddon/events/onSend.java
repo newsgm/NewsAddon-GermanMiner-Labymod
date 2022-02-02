@@ -13,14 +13,16 @@ public class onSend implements MessageSendEvent {
     NewsAddon newsAddon;
     Auktionen auctions = new Auktionen();
     Show sendInChat = new Show();
-    NewsAddonCommand addonCommand = new NewsAddonCommand();
+    NewsAddonCommand addonCommand;
 
     public onSend(NewsAddon newsAddon) {
         this.newsAddon = newsAddon;
+        this.addonCommand = new NewsAddonCommand(newsAddon);
     }
 
     @Override
     public boolean onSend(String s) {
+        String orig = s;
         s = s.toLowerCase();
         String[] args = s.split(" ");
         if(args.length > 1)
@@ -33,7 +35,7 @@ public class onSend implements MessageSendEvent {
             auctions.startAuction(Arrays.copyOfRange(args, 1, args.length));
             return true;
         } else if(s.startsWith("/newsaddon show ")) {
-            sendInChat.init(s.substring(16));
+            sendInChat.init(orig.substring(16));
             return true;
         } else if(args.length == 3 && s.startsWith("/newsaddon auktion ") || s.startsWith("/newsaddon auction ")) {
             auctions.startAuction(Arrays.copyOfRange(args, 2, args.length));

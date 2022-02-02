@@ -5,6 +5,7 @@ import dev.janheist.newsaddon.modules.WerbeCounter90;
 import net.labymod.main.LabyMod;
 import net.minecraft.client.Minecraft;
 
+
 public class PlayerUtilities {
 
     public String PREFIX = "§7[§a§lNEWS§r§7] §r";
