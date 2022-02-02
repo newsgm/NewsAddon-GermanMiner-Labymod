@@ -26,7 +26,7 @@ import java.util.Timer;
 
 public class NewsAddon extends LabyModAddon {
 
-    public final String VERSION = "2.0";
+    public final int VERSION = 2;
 
     public EventManager eventManager;
     public int seconds120 = 0;
@@ -38,7 +38,6 @@ public class NewsAddon extends LabyModAddon {
 
     public Dauerauftrag dauerauftrag = new Dauerauftrag(this);
     private PlayerUtilities pUtils = new PlayerUtilities();
-    private UpdateChecker updateChecker = new UpdateChecker(this);
 
     public boolean sound90;
     public String sound90ausw;
@@ -60,6 +59,8 @@ public class NewsAddon extends LabyModAddon {
         System.out.println("| NEWS-ADDON by JAN HEIST aka. Mexykaner |");
         System.out.println("|                                        |");
 
+
+
         eventManager = this.getApi().getEventManager();
         eventManager.register(new onSend(this));
         eventManager.register(new onReceiver(this));
@@ -68,10 +69,10 @@ public class NewsAddon extends LabyModAddon {
         eventManager.registerOnJoin(new Consumer<ServerData>() {
             @Override
             public void accept(ServerData serverData) {
-                if (serverData.getIp().toLowerCase().contains("germanminer")) {
+                if (serverData.getIp().toLowerCase().contains("germanminer") || true) {
                     pUtils.resetCounter();
                     try {
-                        updateChecker.init();
+                        UpdateChecker.initialize(VERSION);
                         if (!gotDA) {
                             gotDA = true;
                             dauerauftrag.init();

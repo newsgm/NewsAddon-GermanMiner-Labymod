@@ -8,7 +8,12 @@ LabyMod-Addon für die Fraktion News auf dem Minecraft-Wirtschaftsserver GermanM
 Mein Discord: `Mexykaner#8636`
 
 ---
+# Wichtige Änderungen: 
+Die Dateinamen des Addons dürfen nur noch `NewsAddon-<version>.jar` heißen.
 
+Bspw. `NewsAddon-1.jar` für Version 1, usw.
+
+---
 # Installation
 Dieses Addon ist nur für LabyMod bzw. Minecraft in der Version 1.12 gedacht. Die Kompatibilität zu anderen Programmen kann nicht garantiert werden.
 Unter Windows muss die Addon **.jar** in folgenden Ordner: `%appdata%/.minecraft/LabyMod/addons-1.12`
