@@ -26,13 +26,13 @@ public class DauerauftragTimer extends TimerTask {
 
             if (!newsAddon.getConfig().has("soundDA") || newsAddon.getConfig().get("soundDA").getAsBoolean()) {
                 EntityPlayerSP p = Minecraft.getMinecraft().player;
-                // if(newsAddon.soundDAausw.equalsIgnoreCase("none")){
-                p.playSound(new SoundEvent(new ResourceLocation("sirene_2")), 0.25F, 1.0F);
+                if (newsAddon.soundDAausw.equalsIgnoreCase("none")) {
+                    p.playSound(new SoundEvent(new ResourceLocation("sirene_2")), 0.25F, 1.0F);
+                } else {
+                    LabyModCore.getMinecraft().playSound(new ResourceLocation(newsAddon.soundDAausw), 1.0F);
+                }
+
             }
-            //    else{
-            //    LabyModCore.getMinecraft().playSound(new ResourceLocation(newsAddon.soundDAausw), 1.0F);
-            //  }
-            //}
         }
     }
 }
