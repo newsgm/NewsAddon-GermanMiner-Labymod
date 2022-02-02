@@ -45,7 +45,7 @@ public class NewsAddon extends LabyModAddon {
     public boolean sound120;
     public String sound120ausw;
     public boolean soundDA;
-    //public String soundDAausw;
+    public String soundDAausw;
     public boolean playermenu;
     public String daurl;
     private boolean gotDA = false;
@@ -105,7 +105,7 @@ public class NewsAddon extends LabyModAddon {
         this.sound120 = !getConfig().has("sound120") || getConfig().get("sound120").getAsBoolean();
         this.sound120ausw = getConfig().has("sound120ausw") ? getConfig().get("sound120ausw").getAsString() : "block.note.pling";
         this.soundDA = !getConfig().has("soundDA") || getConfig().get("soundDA").getAsBoolean();
-        //this.soundDAausw = getConfig().has("soundDAausw") ? getConfig().get("soundDAausw").getAsString() : "none";
+        this.soundDAausw = getConfig().has("soundDAausw") ? getConfig().get("soundDAausw").getAsString() : "none";
         this.playermenu = !getConfig().has("playermenu") || getConfig().get("playermenu").getAsBoolean();
 
         this.daurl = getConfig().has("daurl") ? getConfig().get("daurl").getAsString() : "none";
@@ -125,7 +125,7 @@ public class NewsAddon extends LabyModAddon {
         getSubSettings().add(new BooleanElement("Nach 120 Werbetimer", this, new ControlElement.IconData(Material.WATCH), "sound120", this.sound120));
         getSubSettings().add(new StringElement("Sound bei 120 Sekunden", this, new ControlElement.IconData(Material.MOB_SPAWNER), "sound120ausw", this.sound120ausw));
         getSubSettings().add(new BooleanElement("Bei Dauerauftrag", this, new ControlElement.IconData(Material.PAPER), "soundDA", this.soundDA));
-        // getSubSettings().add( new StringElement( "Sound wenn ein DA ansteht", this, new ControlElement.IconData( Material.MOB_SPAWNER ), "soundDAausw", this.soundDAausw ) );
+        getSubSettings().add( new StringElement( "Sound wenn ein DA ansteht", this, new ControlElement.IconData( Material.MOB_SPAWNER ), "soundDAausw", this.soundDAausw ) );
         getSubSettings().add(new HeaderElement(""));
         getSubSettings().add(new HeaderElement("§a§lSpielermenü"));
         getSubSettings().add(new BooleanElement("An = Aktiv", this, new ControlElement.IconData(Material.SKULL_ITEM), "playermenu", this.playermenu));
