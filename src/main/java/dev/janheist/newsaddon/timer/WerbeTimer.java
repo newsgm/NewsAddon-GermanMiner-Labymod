@@ -29,13 +29,13 @@ public class WerbeTimer extends TimerTask {
             WerbeCounter90.allowed = 1;
             newsAddon.seconds90 = 0;
             if(newsAddon.sound90 && newsAddon.getServer().contains("germanminer"))
-                LabyModCore.getMinecraft().playSound(new ResourceLocation("block.note.harp"), 1.0F);
+                LabyModCore.getMinecraft().playSound(new ResourceLocation(newsAddon.sound90ausw), 1.0F);
         }
         if(newsAddon.seconds120 == 120) {
             WerbeCounter120.allowed = 1;
             newsAddon.seconds120 = 0;
             if(newsAddon.sound120 && newsAddon.getServer().contains("germanminer"))
-                LabyModCore.getMinecraft().playSound(new ResourceLocation("block.note.pling"), 1.0F);
+                LabyModCore.getMinecraft().playSound(new ResourceLocation(newsAddon.sound120ausw), 1.0F);
         }
     }
 }

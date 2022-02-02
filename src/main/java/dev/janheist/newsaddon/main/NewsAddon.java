@@ -41,8 +41,11 @@ public class NewsAddon extends LabyModAddon {
     private UpdateChecker updateChecker = new UpdateChecker(this);
 
     public boolean sound90;
+    public String sound90ausw;
     public boolean sound120;
+    public String sound120ausw;
     public boolean soundDA;
+    //public String soundDAausw;
     public boolean playermenu;
     public String daurl;
     private boolean gotDA = false;
@@ -65,11 +68,11 @@ public class NewsAddon extends LabyModAddon {
         eventManager.registerOnJoin(new Consumer<ServerData>() {
             @Override
             public void accept(ServerData serverData) {
-                if(serverData.getIp().toLowerCase().contains("germanminer")) {
+                if (serverData.getIp().toLowerCase().contains("germanminer")) {
                     pUtils.resetCounter();
                     try {
                         updateChecker.init();
-                        if(!gotDA) {
+                        if (!gotDA) {
                             gotDA = true;
                             dauerauftrag.init();
                         }
@@ -98,8 +101,11 @@ public class NewsAddon extends LabyModAddon {
     @Override
     public void loadConfig() {
         this.sound90 = !getConfig().has("sound90") || getConfig().get("sound90").getAsBoolean();
+        this.sound90ausw = getConfig().has("sound90ausw") ? getConfig().get("sound90ausw").getAsString() : "block.note.harp";
         this.sound120 = !getConfig().has("sound120") || getConfig().get("sound120").getAsBoolean();
+        this.sound120ausw = getConfig().has("sound120ausw") ? getConfig().get("sound120ausw").getAsString() : "block.note.pling";
         this.soundDA = !getConfig().has("soundDA") || getConfig().get("soundDA").getAsBoolean();
+        //this.soundDAausw = getConfig().has("soundDAausw") ? getConfig().get("soundDAausw").getAsString() : "none";
         this.playermenu = !getConfig().has("playermenu") || getConfig().get("playermenu").getAsBoolean();
 
         this.daurl = getConfig().has("daurl") ? getConfig().get("daurl").getAsString() : "none";
@@ -111,21 +117,25 @@ public class NewsAddon extends LabyModAddon {
         getSubSettings().add(new HeaderElement("§b§l§oJan Heist aka. Mexykaner"));
         getSubSettings().add(new HeaderElement(""));
         getSubSettings().add(new HeaderElement("§a§lDaueraufträge"));
-        getSubSettings().add( new StringElement( "Daten-URL", this, new ControlElement.IconData( Material.MOB_SPAWNER ), "daurl", this.daurl ) );
+        getSubSettings().add(new StringElement("Daten-URL", this, new ControlElement.IconData(Material.MOB_SPAWNER), "daurl", this.daurl));
         getSubSettings().add(new HeaderElement(""));
         getSubSettings().add(new HeaderElement("§a§lSounds"));
-        getSubSettings().add( new BooleanElement( "Nach 90 Werbetimer", this, new ControlElement.IconData( Material.WATCH ), "sound90", this.sound90 ) );
-        getSubSettings().add( new BooleanElement( "Nach 120 Werbetimer", this, new ControlElement.IconData( Material.WATCH ), "sound120", this.sound120 ) );
-        getSubSettings().add( new BooleanElement( "Bei Dauerauftrag", this, new ControlElement.IconData( Material.PAPER ), "soundDA", this.soundDA ) );
+        getSubSettings().add(new BooleanElement("Nach 90 Werbetimer", this, new ControlElement.IconData(Material.WATCH), "sound90", this.sound90));
+        getSubSettings().add(new StringElement("Sound bei 90 Sekunden", this, new ControlElement.IconData(Material.MOB_SPAWNER), "sound90ausw", this.sound90ausw));
+        getSubSettings().add(new BooleanElement("Nach 120 Werbetimer", this, new ControlElement.IconData(Material.WATCH), "sound120", this.sound120));
+        getSubSettings().add(new StringElement("Sound bei 120 Sekunden", this, new ControlElement.IconData(Material.MOB_SPAWNER), "sound120ausw", this.sound120ausw));
+        getSubSettings().add(new BooleanElement("Bei Dauerauftrag", this, new ControlElement.IconData(Material.PAPER), "soundDA", this.soundDA));
+        // getSubSettings().add( new StringElement( "Sound wenn ein DA ansteht", this, new ControlElement.IconData( Material.MOB_SPAWNER ), "soundDAausw", this.soundDAausw ) );
         getSubSettings().add(new HeaderElement(""));
         getSubSettings().add(new HeaderElement("§a§lSpielermenü"));
-        getSubSettings().add( new BooleanElement( "An = Aktiv", this, new ControlElement.IconData( Material.SKULL_ITEM ), "playermenu", this.playermenu ) );
+        getSubSettings().add(new BooleanElement("An = Aktiv", this, new ControlElement.IconData(Material.SKULL_ITEM), "playermenu", this.playermenu));
     }
 
     public void resetSeconds() {
         seconds120 = 0;
         seconds90 = 0;
     }
+
     public String getServer() {
         return LabyMod.getInstance().getCurrentServerData().getIp().toLowerCase();
     }
