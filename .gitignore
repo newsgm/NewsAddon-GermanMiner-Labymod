@@ -17,3 +17,5 @@ out/
 eclipse/
 /out/
 /eclipse/
+/run/
+/gradle/
