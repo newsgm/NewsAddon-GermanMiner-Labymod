@@ -20,13 +20,11 @@ public class Auktionen {
     private final List<String> bizTexte = new ArrayList<>();
     private final List<String> autoTexte = new ArrayList<>();
     private final List<String> codeTexte = new ArrayList<>();
-    private int current_counter;
 
     public Auktionen() {
         LocalDateTime localDateTime = LocalDateTime.now().plusDays(7);
         DateTimeFormatter formatDate = DateTimeFormatter.ofPattern("dd.MM.yyyy", Locale.GERMAN);
         String latestEnd = formatDate.format(localDateTime);
-        current_counter = 0;
 
         itemTexte.add("Bist du dir bewusst, dass die Auktion anfangs 500€ kostet? Weiterhin fallen 3% vom Gewinn Auktionsgebühr an, sofern das Item versteigert wird.");
         itemTexte.add("An welchem Tag und zu welcher Uhrzeit soll die Auktion enden? (Maximal bis zum " + latestEnd + ")");
@@ -114,22 +112,19 @@ public class Auktionen {
     }
 
     private void doAuction(List<String> msg) {
-        if(current_counter == 0) {
-            pUtils.displayPrefix("");
-            pUtils.displayPrefix("§aKlicke nun die Texte für die jeweiligen Auktionstexte an");
+        pUtils.displayPrefix("");
+        pUtils.displayPrefix("§aKlicke nun die Tete für die jeweiligen Auktionstexte an:");
+        
+        for(int i = 0; i < msg.size(); i++) {
+            TextComponentString next = new TextComponentString(pUtils.PREFIX + "§a" + (i+1) + ". Auktionstext einfügen");
+            Style style = new Style();
+            style.setColor(TextFormatting.GREEN);
+            style.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, msg.get(i++)));
+            next.setStyle(style);
+            Minecraft.getMinecraft().player.sendMessage(next);
         }
-        TextComponentString next = new TextComponentString(pUtils.PREFIX + "§a" + (current_counter+1) + ". Auktionstext einfügen");
-        Style style = new Style();
-        style.setColor(TextFormatting.GREEN);
-        style.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, msg.get(current_counter++)));
-        next.setStyle(style);
-        Minecraft.getMinecraft().player.sendMessage(next);
-        if(current_counter < msg.size())
-            doAuction(msg);
-        else {
-            current_counter = 0;
-            pUtils.displayPrefix("");
-        }
+
+        pUtils.displayPrefix("");
     }
 
 
