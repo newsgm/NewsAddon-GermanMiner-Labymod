@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="73361c94-1ecf-4468-8bcf-7a7db8b49ef9" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/Addon.iws" beforeDir="false" afterPath="$PROJECT_DIR$/Addon.iws" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dev/janheist/newsaddon/main/NewsAddon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/janheist/newsaddon/main/NewsAddon.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dev/janheist/newsaddon/modules/UpdateChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/janheist/newsaddon/modules/UpdateChecker.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -243,7 +242,7 @@
       <workItem from="1643792750902" duration="5225000" />
       <workItem from="1643800154654" duration="16454000" />
       <workItem from="1643835672311" duration="7820000" />
-      <workItem from="1643901266929" duration="6074000" />
+      <workItem from="1643901266929" duration="9283000" />
     </task>
     <servers />
   </component>

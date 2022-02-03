@@ -29,10 +29,8 @@ public class UpdateChecker {
 
         File addonFolder;
         if(args.length >= 1) {
-            System.out.println(args[0]);
             addonFolder = new File(args[0]);
         } else {
-            System.out.println("Hallo");
             addonFolder = new File(System.getenv("APPDATA") + File.separator + ".minecraft" + File.separator + "LabyMod" + File.separator + "addons-1.12");
         }
 
@@ -85,10 +83,9 @@ public class UpdateChecker {
         String firstline = br.readLine();
         String newDownloadLink = br.readLine();
         int newVersion = Integer.parseInt(br.readLine());
-        System.out.println("[NEWS-DEBUG] old addon version: " + newVersion + " / " + VERSION);
+        System.out.println("[NEWS-DEBUG] newest version: " + newVersion + ", current version: " + VERSION);
 
         if(newVersion > VERSION) {
-            System.out.println("[NEWS-DEBUG] old addon version: " + newVersion + " / " + VERSION);
             displayPrefix("");
             while ((line = br.readLine()) != null) {
                 displayPrefix(line);
@@ -114,14 +111,35 @@ public class UpdateChecker {
             updatedAddon = new File(tempDir.toFile(), "NewsAddon-" + newVersion + ".jar");
             Files.copy(urlConnection.getInputStream(), updatedAddon.toPath(), new CopyOption[] { StandardCopyOption.REPLACE_EXISTING });
 
-            System.out.println("[NEWS-DEBUG] a: " + updatedAddon.getAbsolutePath());
-            System.out.println("[NEWS-DEBUG] a: " + "java -cp \"" + updatedAddon.getAbsolutePath() + "\" dev.janheist.newsaddon.modules.UpdateChecker \"" + minecraftDirectory + "\"");
-
-
             Runtime.getRuntime().addShutdownHook(new Thread(() -> {
                 try {
-                    Runtime.getRuntime().exec("java -cp \"" + updatedAddon.getAbsolutePath() + "\" dev.janheist.newsaddon.modules.UpdateChecker \"" + minecraftDirectory + "\"");
-                    //Runtime.getRuntime().exec("\"" + System.getProperty("java.home") + File.separator + "bin" + File.separator + "javaw.exe\" -cp \"" + updatedAddon.getAbsolutePath() + "\" dev.janheist.newsaddon.modules.UpdateChecker \"" + newsAddon.minecraftDirectory + "\"");
+                    if(System.getProperty("os.name").toLowerCase().startsWith("windows")) {
+                        String yourShellInput = "\"" + minecraftDirectory + "\"";  // or whatever ...
+                        String[] commandAndArgs = new String[]{"java", "-cp", "\"" + updatedAddon.getAbsolutePath() + "\"", "dev.janheist.newsaddon.modules.UpdateChecker", yourShellInput};
+                        Runtime.getRuntime().exec(commandAndArgs);
+                        System.out.println("[NEWS-DEBUG] Windows-User: " + commandAndArgs);
+                    } else {
+                        Runtime.getRuntime().exec("sh -c 'java -cp \"" + updatedAddon.getAbsolutePath() + "\" dev.janheist.newsaddon.modules.UpdateChecker \"" + minecraftDirectory + "\"'");
+                        ProcessBuilder processBuilder = new ProcessBuilder();
+                        processBuilder.command("sh", "-c", "java -cp \"" + updatedAddon.getAbsolutePath() + "\" dev.janheist.newsaddon.modules.UpdateChecker \"" + minecraftDirectory + "\"");
+                        Process process = processBuilder.start();
+
+                        StringBuilder output = new StringBuilder();
+                        BufferedReader reader = new BufferedReader(
+                                new InputStreamReader(process.getInputStream()));
+
+                        String line;
+                        while ((line = reader.readLine()) != null) {
+                            output.append(line).append("\n");
+                        }
+
+                        System.out.println("[NEWS-DEBUG] ProcessBuilder: " + output);
+
+
+                        System.out.println("[NEWS-DEBUG] No Windows-User: " + "sh -c 'java -cp \"" + updatedAddon.getAbsolutePath() + "\" dev.janheist.newsaddon.modules.UpdateChecker \"" + minecraftDirectory + "\"'");
+
+                    }
+
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
