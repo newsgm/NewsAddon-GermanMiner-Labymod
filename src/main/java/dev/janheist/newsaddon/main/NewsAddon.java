@@ -28,6 +28,9 @@ public class NewsAddon extends LabyModAddon {
 
     public final int VERSION = 2;
 
+    // Vor Release auf false setzen!
+    public final boolean DEBUGMODE = false;
+
     public EventManager eventManager;
     public int seconds120 = 0;
     public int seconds90 = 0;
@@ -57,6 +60,7 @@ public class NewsAddon extends LabyModAddon {
     public void onEnable() {
         System.out.println("|                                        |");
         System.out.println("| NEWS-ADDON by JAN HEIST aka. Mexykaner |");
+        System.out.println("|            Aktuelle Version: " + VERSION + " |");
         System.out.println("|                                        |");
 
 
@@ -69,7 +73,7 @@ public class NewsAddon extends LabyModAddon {
         eventManager.registerOnJoin(new Consumer<ServerData>() {
             @Override
             public void accept(ServerData serverData) {
-                if (serverData.getIp().toLowerCase().contains("germanminer") || true) {
+                if (serverData.getIp().toLowerCase().contains("germanminer") || newsAddon.DEBUGMODE) {
                     pUtils.resetCounter();
                     try {
                         UpdateChecker.initialize(VERSION);

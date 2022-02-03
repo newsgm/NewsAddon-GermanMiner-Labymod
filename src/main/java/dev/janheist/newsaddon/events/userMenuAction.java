@@ -17,7 +17,7 @@ public class userMenuAction implements UserMenuActionEvent {
 
     @Override
     public void createActions(User user, EntityPlayer entityPlayer, NetworkPlayerInfo networkPlayerInfo, List<UserActionEntry> list) {
-        if(newsAddon.playermenu && newsAddon.getServer().contains("germanminer")) {
+        if(newsAddon.playermenu && (newsAddon.DEBUGMODE || newsAddon.getServer().contains("germanminer"))) {
             list.add(new UserActionEntry("§7[§aN§7]§f Grüßen", UserActionEntry.EnumActionType.SUGGEST_COMMAND, "/newsaddon show greet {name}".replaceAll("(§.)", ""), null));
             list.add(new UserActionEntry("§7[§aN§7]§f Werbearten", UserActionEntry.EnumActionType.SUGGEST_COMMAND, "/newsaddon show types", null));
             list.add(new UserActionEntry("§7[§aN§7]§f Scan", UserActionEntry.EnumActionType.SUGGEST_COMMAND, "/newsaddon scan {name}".replaceAll("(§.)", ""), null));
