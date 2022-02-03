@@ -3,7 +3,7 @@
   "name": "News-Addon",
   "mainClass": "dev.janheist.newsaddon.main.NewsAddon",
   "description": "Hilfestellung im News-System!",
-  "version": 3,
+  "version": 4,
   "author": "Jan Heist aka. Mexykaner",
   "category": 1,
   "icon": "http://http.mexykaner.de/app/news/addon-icon.png"

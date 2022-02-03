@@ -119,7 +119,7 @@ public class Auktionen {
             TextComponentString next = new TextComponentString(pUtils.PREFIX + "§a" + (i+1) + ". Auktionstext einfügen");
             Style style = new Style();
             style.setColor(TextFormatting.GREEN);
-            style.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, msg.get(i++)));
+            style.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, msg.get(i)));
             next.setStyle(style);
             Minecraft.getMinecraft().player.sendMessage(next);
         }
