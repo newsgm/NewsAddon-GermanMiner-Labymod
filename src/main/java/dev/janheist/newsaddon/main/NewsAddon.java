@@ -17,7 +17,9 @@ import net.labymod.settings.elements.*;
 import net.labymod.utils.Consumer;
 import net.labymod.utils.Material;
 import net.labymod.utils.ServerData;
+import net.minecraft.client.Minecraft;
 
+import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -26,7 +28,7 @@ import java.util.Timer;
 
 public class NewsAddon extends LabyModAddon {
 
-    public final int VERSION = 2;
+    public final int VERSION = 3;
 
     // Vor Release auf false setzen!
     public final boolean DEBUGMODE = false;
@@ -62,8 +64,8 @@ public class NewsAddon extends LabyModAddon {
         System.out.println("| NEWS-ADDON by JAN HEIST aka. Mexykaner |");
         System.out.println("|            Aktuelle Version: " + VERSION + " |");
         System.out.println("|                                        |");
-
-
+        System.out.println("[NEWS-DEBUG] " + System.getenv("APPDATA") + File.separator + ".minecraft" + File.separator + "LabyMod" + File.separator + "addons-1.12");
+        System.out.println("[NEWS-DEBUG] " + Minecraft.getMinecraft().mcDataDir.getAbsolutePath() + File.separator + "LabyMod" + File.separator + "addons-1.12");
 
         eventManager = this.getApi().getEventManager();
         eventManager.register(new onSend(this));
@@ -73,13 +75,13 @@ public class NewsAddon extends LabyModAddon {
         eventManager.registerOnJoin(new Consumer<ServerData>() {
             @Override
             public void accept(ServerData serverData) {
-                if (serverData.getIp().toLowerCase().contains("germanminer") || newsAddon.DEBUGMODE) {
+                if (serverData.getIp().toLowerCase().contains("germanminer") || DEBUGMODE) {
                     pUtils.resetCounter();
                     try {
-                        UpdateChecker.initialize(VERSION);
                         if (!gotDA) {
                             gotDA = true;
                             dauerauftrag.init();
+                            UpdateChecker.initialize(VERSION);
                         }
                     } catch (IOException | ParseException e) {
                         e.printStackTrace();
