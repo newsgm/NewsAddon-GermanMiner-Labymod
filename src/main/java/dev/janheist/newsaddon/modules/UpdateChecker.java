@@ -27,7 +27,11 @@ public class UpdateChecker {
     public static void main(String[] args) throws IOException, URISyntaxException {
         File currentFile = new File(UpdateChecker.class.getProtectionDomain().getCodeSource().getLocation().toURI());
 
-        File addonFolder = new File(System.getenv("APPDATA") + File.separator + ".minecraft" + File.separator + "LabyMod" + File.separator + "addons-1.12");
+        File addonFolder;
+        if(args.length >= 1)
+            addonFolder = new File(args[0]);
+        else addonFolder = new File(System.getenv("APPDATA") + File.separator + ".minecraft" + File.separator + "LabyMod" + File.separator + "addons-1.12");
+        
         File[] files = addonFolder.listFiles();
         if (files == null)
             return;
@@ -105,10 +109,14 @@ public class UpdateChecker {
             updatedAddon = new File(tempDir.toFile(), "NewsAddon-" + newVersion + ".jar");
             Files.copy(urlConnection.getInputStream(), updatedAddon.toPath(), new CopyOption[] { StandardCopyOption.REPLACE_EXISTING });
 
+
+            Path currentRelativePath = Paths.get("");
+            String currPath = currentRelativePath.toAbsolutePath().toString();
+
             Runtime.getRuntime().addShutdownHook(new Thread(() -> {
                 try {
                     Thread.sleep(3000);
-                    Runtime.getRuntime().exec("\"" + System.getProperty("java.home") + File.separator + "bin" + File.separator + "javaw.exe\" -cp \"" + updatedAddon.getAbsolutePath() + "\" dev.janheist.newsaddon.modules.UpdateChecker");
+                    Runtime.getRuntime().exec("\"" + System.getProperty("java.home") + File.separator + "bin" + File.separator + "javaw.exe\" -cp \"" + updatedAddon.getAbsolutePath() + "\" dev.janheist.newsaddon.modules.UpdateChecker " + currPath);
                     } catch (IOException | InterruptedException e) {
                     e.printStackTrace();
                 }
