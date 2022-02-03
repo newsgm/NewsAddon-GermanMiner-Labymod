@@ -2,19 +2,19 @@ package dev.janheist.newsaddon.modules;
 
 import dev.janheist.newsaddon.main.NewsAddon;
 import net.labymod.main.LabyMod;
+import net.minecraft.client.Minecraft;
 
 import java.io.*;
-import java.net.*;
-import java.nio.file.CopyOption;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.StandardCopyOption;
+import java.net.HttpURLConnection;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.nio.file.*;
 import java.nio.file.attribute.FileAttribute;
 import java.util.Date;
 import java.util.TimeZone;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.concurrent.TimeUnit;
 
 public class UpdateChecker {
     static NewsAddon newsAddon;
@@ -28,10 +28,14 @@ public class UpdateChecker {
         File currentFile = new File(UpdateChecker.class.getProtectionDomain().getCodeSource().getLocation().toURI());
 
         File addonFolder;
-        if(args.length >= 1)
+        if(args.length >= 1) {
+            System.out.println(args[0]);
             addonFolder = new File(args[0]);
-        else addonFolder = new File(System.getenv("APPDATA") + File.separator + ".minecraft" + File.separator + "LabyMod" + File.separator + "addons-1.12");
-        
+        } else {
+            System.out.println("Hallo");
+            addonFolder = new File(System.getenv("APPDATA") + File.separator + ".minecraft" + File.separator + "LabyMod" + File.separator + "addons-1.12");
+        }
+
         File[] files = addonFolder.listFiles();
         if (files == null)
             return;
@@ -97,6 +101,7 @@ public class UpdateChecker {
     }
 
     private static void update(int newVersion, String url) {
+        String minecraftDirectory = Minecraft.getMinecraft().mcDataDir.getAbsolutePath().replace("\\", File.separator) + File.separator + "LabyMod" + File.separator + "addons-1.12";
         try {
             Path tempDir;
             try {
@@ -109,15 +114,15 @@ public class UpdateChecker {
             updatedAddon = new File(tempDir.toFile(), "NewsAddon-" + newVersion + ".jar");
             Files.copy(urlConnection.getInputStream(), updatedAddon.toPath(), new CopyOption[] { StandardCopyOption.REPLACE_EXISTING });
 
+            System.out.println("[NEWS-DEBUG] a: " + updatedAddon.getAbsolutePath());
+            System.out.println("[NEWS-DEBUG] a: " + "java -cp \"" + updatedAddon.getAbsolutePath() + "\" dev.janheist.newsaddon.modules.UpdateChecker \"" + minecraftDirectory + "\"");
 
-            Path currentRelativePath = Paths.get("");
-            String currPath = currentRelativePath.toAbsolutePath().toString();
 
             Runtime.getRuntime().addShutdownHook(new Thread(() -> {
                 try {
-                    Thread.sleep(3000);
-                    Runtime.getRuntime().exec("\"" + System.getProperty("java.home") + File.separator + "bin" + File.separator + "javaw.exe\" -cp \"" + updatedAddon.getAbsolutePath() + "\" dev.janheist.newsaddon.modules.UpdateChecker " + currPath);
-                    } catch (IOException | InterruptedException e) {
+                    Runtime.getRuntime().exec("java -cp \"" + updatedAddon.getAbsolutePath() + "\" dev.janheist.newsaddon.modules.UpdateChecker \"" + minecraftDirectory + "\"");
+                    //Runtime.getRuntime().exec("\"" + System.getProperty("java.home") + File.separator + "bin" + File.separator + "javaw.exe\" -cp \"" + updatedAddon.getAbsolutePath() + "\" dev.janheist.newsaddon.modules.UpdateChecker \"" + newsAddon.minecraftDirectory + "\"");
+                } catch (IOException e) {
                     e.printStackTrace();
                 }
             }));
@@ -130,4 +135,3 @@ public class UpdateChecker {
         LabyMod.getInstance().displayMessageInChat("§7[§a§lNEWS§r§7] §r".concat(message));
     }
 }
-
