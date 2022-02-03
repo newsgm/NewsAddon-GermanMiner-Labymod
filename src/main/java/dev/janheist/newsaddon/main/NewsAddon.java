@@ -28,10 +28,10 @@ import java.util.Timer;
 
 public class NewsAddon extends LabyModAddon {
 
-    public final int VERSION = 1;
+    public final int VERSION = 3;
 
     // Vor Release auf false setzen!
-    public final boolean DEBUGMODE = true;
+    public final boolean DEBUGMODE = false;
 
     public EventManager eventManager;
     public int seconds120 = 0;
