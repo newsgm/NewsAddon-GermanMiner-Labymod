@@ -20,19 +20,23 @@ public class DauerauftragTimer extends TimerTask {
 
     @Override
     public void run() {
-        if (newsAddon.DEBUGMODE || LabyMod.getInstance().getCurrentServerData().getIp().toLowerCase().contains("germanminer")) {
-            PlayerUtilities pUtils = new PlayerUtilities();
-            pUtils.displayPrefix("§a§lEventuell muss ein Dauerauftrag geschaltet werden!");
+        try {
+            if (newsAddon.DEBUGMODE || LabyMod.getInstance().getCurrentServerData().getIp().toLowerCase().contains("germanminer")) {
+                PlayerUtilities pUtils = new PlayerUtilities();
+                pUtils.displayPrefix("§a§lEventuell muss ein Dauerauftrag geschaltet werden!");
 
-            if (!newsAddon.getConfig().has("soundDA") || newsAddon.getConfig().get("soundDA").getAsBoolean()) {
-                EntityPlayerSP p = Minecraft.getMinecraft().player;
-                if (newsAddon.soundDAausw.equalsIgnoreCase("none")) {
-                    p.playSound(new SoundEvent(new ResourceLocation("sirene_2")), 0.25F, 1.0F);
-                } else {
-                    LabyModCore.getMinecraft().playSound(new ResourceLocation(newsAddon.soundDAausw), 1.0F);
+                if (!newsAddon.getConfig().has("soundDA") || newsAddon.getConfig().get("soundDA").getAsBoolean()) {
+                    EntityPlayerSP p = Minecraft.getMinecraft().player;
+                    if (newsAddon.soundDAausw.equalsIgnoreCase("sirene_2")) {
+                        p.playSound(new SoundEvent(new ResourceLocation("sirene_2")), 0.25F, 1.0F);
+                    } else {
+                        LabyModCore.getMinecraft().playSound(new ResourceLocation(newsAddon.soundDAausw), 1.0F);
+                    }
+
                 }
-
             }
+        } catch (NullPointerException ex) {
+            System.out.println("[NEWS-DEBUG] NullPointerException at DauerauftragTimer");
         }
     }
 }

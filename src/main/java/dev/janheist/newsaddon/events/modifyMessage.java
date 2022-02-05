@@ -9,11 +9,10 @@ import net.minecraft.util.text.event.ClickEvent;
 
 import java.util.UUID;
 
-public class messageModifyChatEvent implements MessageModifyChatEvent {
-
+public class modifyMessage implements MessageModifyChatEvent {
     private String lastMessage = UUID.randomUUID().toString();
     NewsAddon newsAddon;
-    public messageModifyChatEvent(NewsAddon newsAddon) {
+    public modifyMessage(NewsAddon newsAddon) {
         this.newsAddon = newsAddon;
     }
 
@@ -21,6 +20,7 @@ public class messageModifyChatEvent implements MessageModifyChatEvent {
     public Object onModifyChatMessage(Object o) {
         try {
             ITextComponent cct = (ITextComponent) o;
+
             String unformattedText = cct.getUnformattedText();
             if(cct.getUnformattedText().equals(lastMessage) || cct.getUnformattedText().trim().isEmpty())
                 return o;

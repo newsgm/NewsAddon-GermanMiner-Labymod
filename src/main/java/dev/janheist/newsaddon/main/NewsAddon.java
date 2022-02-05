@@ -1,6 +1,6 @@
 package dev.janheist.newsaddon.main;
 
-import dev.janheist.newsaddon.events.messageModifyChatEvent;
+import dev.janheist.newsaddon.events.modifyMessage;
 import dev.janheist.newsaddon.events.onReceiver;
 import dev.janheist.newsaddon.events.onSend;
 import dev.janheist.newsaddon.events.userMenuAction;
@@ -70,7 +70,7 @@ public class NewsAddon extends LabyModAddon {
         eventManager = this.getApi().getEventManager();
         eventManager.register(new onSend(this));
         eventManager.register(new onReceiver(this));
-        eventManager.register(new messageModifyChatEvent(this));
+        eventManager.register(new modifyMessage(this));
         eventManager.register(new userMenuAction(this));
         eventManager.registerOnJoin(new Consumer<ServerData>() {
             @Override
@@ -112,10 +112,10 @@ public class NewsAddon extends LabyModAddon {
         this.sound120 = !getConfig().has("sound120") || getConfig().get("sound120").getAsBoolean();
         this.sound120ausw = getConfig().has("sound120ausw") ? getConfig().get("sound120ausw").getAsString() : "block.note.pling";
         this.soundDA = !getConfig().has("soundDA") || getConfig().get("soundDA").getAsBoolean();
-        this.soundDAausw = getConfig().has("soundDAausw") ? getConfig().get("soundDAausw").getAsString() : "none";
+        this.soundDAausw = getConfig().has("soundDAausw") ? getConfig().get("soundDAausw").getAsString() : "sirene_2";
         this.playermenu = !getConfig().has("playermenu") || getConfig().get("playermenu").getAsBoolean();
 
-        this.daurl = getConfig().has("daurl") ? getConfig().get("daurl").getAsString() : "none";
+        this.daurl = getConfig().has("daurl") ? getConfig().get("daurl").getAsString() : "sirene_2";
     }
 
     @Override

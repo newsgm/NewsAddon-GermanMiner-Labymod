@@ -2,10 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="73361c94-1ecf-4468-8bcf-7a7db8b49ef9" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/dev/janheist/newsaddon/events/modifyMessage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Addon.iws" beforeDir="false" afterPath="$PROJECT_DIR$/Addon.iws" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dev/janheist/newsaddon/features/Auktionen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/janheist/newsaddon/features/Auktionen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/janheist/newsaddon/events/messageModifyChatEvent.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dev/janheist/newsaddon/main/NewsAddon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/janheist/newsaddon/main/NewsAddon.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/addon.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/addon.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/janheist/newsaddon/timer/DauerauftragTimer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/janheist/newsaddon/timer/DauerauftragTimer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/janheist/newsaddon/timer/WerbeTimer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/janheist/newsaddon/timer/WerbeTimer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -174,15 +176,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -245,6 +245,7 @@
       <workItem from="1643800154654" duration="16454000" />
       <workItem from="1643835672311" duration="7820000" />
       <workItem from="1643901266929" duration="9283000" />
+      <workItem from="1644095817499" duration="968000" />
     </task>
     <servers />
   </component>
