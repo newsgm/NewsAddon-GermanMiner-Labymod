@@ -1,6 +1,7 @@
 package dev.janheist.newsaddon.features;
 
 import dev.janheist.newsaddon.main.NewsAddon;
+import dev.janheist.newsaddon.modules.UpdateChecker;
 
 public class NewsAddonCommand {
 
@@ -102,9 +103,13 @@ public class NewsAddonCommand {
                 pUtils.displayPrefix("§a" + item);
             }
             pUtils.displayPrefix("");
+        } else if(args[1].equals("update")) {
+            pUtils.displayPrefix("§aPrüfe in 10 Sekunden auf Updates. Sollte ein Update verfügbar sein, wirst du benachrichtigt.");
+            UpdateChecker.initialize(newsAddon.VERSION);
         } else {
             pUtils.displayPrefix("");
-            pUtils.displayPrefix("§e/newsaddon §e[help, hv1, hv2, illegal, warn, scan]");
+            pUtils.displayPrefix("§aAktuelle Version: " + newsAddon.VERSION);
+            pUtils.displayPrefix("§e/newsaddon §e[help, hv1, hv2, illegal, warn, scan, update]");
             pUtils.displayPrefix("§e/auktion [item, code, gs, mie, auto]");
             pUtils.displayPrefix("");
         }
