@@ -1,7 +1,6 @@
 package dev.janheist.newsaddon.main;
 
 import dev.janheist.newsaddon.events.modifyMessage;
-import dev.janheist.newsaddon.events.onReceiver;
 import dev.janheist.newsaddon.events.onSend;
 import dev.janheist.newsaddon.events.userMenuAction;
 import dev.janheist.newsaddon.features.Dauerauftrag;
@@ -69,7 +68,6 @@ public class NewsAddon extends LabyModAddon {
 
         eventManager = this.getApi().getEventManager();
         eventManager.register(new onSend(this));
-        eventManager.register(new onReceiver(this));
         eventManager.register(new modifyMessage(this));
         eventManager.register(new userMenuAction(this));
         eventManager.registerOnJoin(new Consumer<ServerData>() {

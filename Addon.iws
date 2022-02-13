@@ -3,7 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="73361c94-1ecf-4468-8bcf-7a7db8b49ef9" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/Addon.iws" beforeDir="false" afterPath="$PROJECT_DIR$/Addon.iws" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dev/janheist/newsaddon/features/NewsAddonCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/janheist/newsaddon/features/NewsAddonCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/janheist/newsaddon/events/modifyMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/janheist/newsaddon/events/modifyMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/janheist/newsaddon/events/onReceive.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/janheist/newsaddon/events/onReceiver.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dev/janheist/newsaddon/main/NewsAddon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/janheist/newsaddon/main/NewsAddon.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -174,6 +176,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <option name="TEST_OBJECT" value="class" />
       <option name="VM_PARAMETERS" />
@@ -234,6 +247,7 @@
       <workItem from="1643901266929" duration="9283000" />
       <workItem from="1644095817499" duration="1343000" />
       <workItem from="1644183540467" duration="72000" />
+      <workItem from="1644783072499" duration="4082000" />
     </task>
     <servers />
   </component>
