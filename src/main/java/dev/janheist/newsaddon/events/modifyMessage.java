@@ -40,7 +40,7 @@ public class modifyMessage implements MessageModifyChatEvent {
             if(cct.getUnformattedText().equals(lastMessage) || cct.getUnformattedText().trim().isEmpty())
                 return o;
 
-            if (formattedText.contains("------------- ***** WERBUNG ***** -------------")) {
+            if (unformattedText.contains("------------- ***** WERBUNG ***** -------------")) {
                 newsAddon.resetSeconds();
                 WerbeCounter90.allowed = 0;
                 WerbeCounter120.allowed = 0;
