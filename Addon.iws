@@ -3,11 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="73361c94-1ecf-4468-8bcf-7a7db8b49ef9" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/Addon.iws" beforeDir="false" afterPath="$PROJECT_DIR$/Addon.iws" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dev/janheist/newsaddon/events/modifyMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/janheist/newsaddon/events/modifyMessage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dev/janheist/newsaddon/features/Dauerauftrag.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/janheist/newsaddon/features/Dauerauftrag.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dev/janheist/newsaddon/features/NewsAddonCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/janheist/newsaddon/features/NewsAddonCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dev/janheist/newsaddon/main/NewsAddon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/janheist/newsaddon/main/NewsAddon.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/addon.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/addon.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -177,13 +174,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -251,6 +250,7 @@
       <workItem from="1644783072499" duration="4082000" />
       <workItem from="1644787818093" duration="655000" />
       <workItem from="1645020320204" duration="2533000" />
+      <workItem from="1645026100392" duration="52000" />
     </task>
     <servers />
   </component>
