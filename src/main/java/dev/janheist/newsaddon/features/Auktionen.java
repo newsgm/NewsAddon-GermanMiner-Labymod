@@ -52,17 +52,17 @@ public class Auktionen {
         bizTexte.add("In welchen Schritten sollen die Spieler mindestens bieten?");
         bizTexte.add("Dann bekomme ich bitte noch deine Kontonummer und die 500€ Auktionsgebühr.");
 
-        autoTexte.add("Bist du dir bewusst, dass die Auktion anfangs 500€ kostet? Weiterhin fallen 3% vom Gewinn Auktionsgebühr an, sofern das Auto versteigert wird.");
-        autoTexte.add("Von welcher Marke ist das Auto und welches Modell ist es?");
-        autoTexte.add("Besitzt das Auto irgendwelche Tunings?");
-        autoTexte.add("Welche Farbe hat das Auto?");
-        autoTexte.add("Welchen Reparaturzustand hat das Auto? Dieser muss min. 80% sein. Gerne kannst du dein Auto auch im Anschluss in der Garage beim Mechaniker reparieren.");
+        autoTexte.add("Bist du dir bewusst, dass die Auktion anfangs 500€ kostet? Weiterhin fallen 3% vom Gewinn Auktionsgebühr an, sofern das Vehicle versteigert wird.");
+        autoTexte.add("Von welcher Marke ist das Vehicle und welches Modell ist es?");
+        autoTexte.add("Besitzt das Vehicle irgendwelche Tunings?");
+        autoTexte.add("Welche Farbe hat das Vehicle?");
+        autoTexte.add("Welchen Reparaturzustand hat das Vehicle? Dieser muss min. 80% sein. Gerne kannst du dein Auto auch im Anschluss in der Garage beim Mechaniker reparieren.");
         autoTexte.add("An welchem Tag und zu welcher Uhrzeit soll die Auktion enden? (Maximal bis zum " + latestEnd + ")");
         autoTexte.add("Wie soll der Startpreis in der Auktion sein?");
         autoTexte.add("Welche Summe soll für den Sofortkauf bestimmt werden?");
         autoTexte.add("In welchen Schritten sollen die Spieler mindestens bieten?");
-        autoTexte.add("Kennst du den aktuellen Neupreis des Autos im Autohaus?");
-        autoTexte.add("Dann bräuchte ich bitte einmal deine Kontonummer und den Autoschlüssel mit den 500€ Auktionsgebühr über das Handelsmenü.");
+        autoTexte.add("Kennst du den aktuellen Neupreis des Vehicles?");
+        autoTexte.add("Dann bräuchte ich bitte einmal deine Kontonummer und den Vehicle-Schlüssel mit den 500€ Auktionsgebühr über das Handelsmenü.");
 
         codeTexte.add("Bist du dir bewusst, dass die Auktion anfangs 500€ kostet? Weiterhin fallen 3% vom Gewinn Auktionsgebühr an, sofern der Gutschein versteigert wird.");
         codeTexte.add("An welchem Tag und zu welcher Uhrzeit soll die Auktion enden? (Maximal bis zum " + latestEnd + ")");
@@ -98,8 +98,12 @@ public class Auktionen {
             case "vehicle":
             case "auto":
             case "car":
+            case "motorrad":
+            case "mofa":
+            case "heli":
+            case "helikopter":
                 doAuction(autoTexte);
-                pUtils.displayPrefix("§aDie Person muss noch einen Vertrag unterschreiben.");
+                pUtils.displayPrefix("§aDie Person muss noch einen Vertrag unterschreiben und dir einen Schlüssel geben.");
                 break;
             case "biz":
                 doAuction(bizTexte);
