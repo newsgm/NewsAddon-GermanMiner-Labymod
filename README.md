@@ -59,6 +59,10 @@ Mit `/newsaddon scan stop` ist niemand mehr ausgewählt.
 Mit diesem Befehl kannst du dir die heutigen Daueraufträge anzeigen lassen (Vorsicht Spam :wink:).
 Die Zeiten aktualisieren sich bei jedem Start von Minecraft. _Weitere Infos unten_
 
+### /newsaddon update
+Wartet 10 Sekunden und sucht dann nach Updates.
+Dies passiert auch einmalig beim Joinen auf GermanMiner, cirka Zeitgleich mit initialisieren der Daueraufträge.
+
 ### /auktion `[item, code, gs, auto, biz]` || /auction `[item, code, gs, auto, biz]`
 Hiermit können Auktionstexte abgerufen werden. Für die verschiedenen Auktionen gibt es mehrere Aliasse.
 - Auktionen für Items: `/auktion `
