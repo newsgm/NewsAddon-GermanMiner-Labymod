@@ -26,7 +26,7 @@ public class Dauerauftrag {
     }
 
     public void init() throws IOException, ParseException {
-        if(newsAddon.daurl.toLowerCase().startsWith("http")) {
+        if(newsAddon.daurl.toLowerCase().startsWith("http") && newsAddon.daurl.length() > 8) {
             TimeZone.getTimeZone("Europe/Berlin");
             Date now = new Date();
 

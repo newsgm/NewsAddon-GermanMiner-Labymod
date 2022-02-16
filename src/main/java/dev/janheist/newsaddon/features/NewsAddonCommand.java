@@ -88,7 +88,7 @@ public class NewsAddonCommand {
             if(!(args.length > 2)) {
                 pUtils.displayPrefix("§e/newsaddon scan [Name,stop]");
             } else {
-                if(args[2].equalsIgnoreCase("stop") || args[2].equalsIgnoreCase(last_scanned_name)) {
+                if(args[2].equalsIgnoreCase("stop") || (args[2].equalsIgnoreCase(last_scanned_name) && newsAddon.scanner)) {
                     newsAddon.scan_name = null;
                     newsAddon.scanner = false;
                     pUtils.displayPrefix("§cScanner aus");
@@ -111,7 +111,7 @@ public class NewsAddonCommand {
         } else {
             pUtils.displayPrefix("");
             pUtils.displayPrefix("§aAktuelle Version: " + newsAddon.VERSION);
-            pUtils.displayPrefix("§e/newsaddon §e[help, hv1, hv2, illegal, warn, scan, update]");
+            pUtils.displayPrefix("§e/newsaddon §e[help, hv1, hv2, illegal, warn, scan, show, update]");
             pUtils.displayPrefix("§e/auktion [item, code, gs, mie, auto]");
             pUtils.displayPrefix("");
         }

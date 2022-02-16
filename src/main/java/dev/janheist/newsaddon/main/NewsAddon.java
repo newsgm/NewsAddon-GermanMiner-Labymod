@@ -113,7 +113,7 @@ public class NewsAddon extends LabyModAddon {
         this.soundDAausw = getConfig().has("soundDAausw") ? getConfig().get("soundDAausw").getAsString() : "sirene_2";
         this.playermenu = !getConfig().has("playermenu") || getConfig().get("playermenu").getAsBoolean();
 
-        this.daurl = getConfig().has("daurl") ? getConfig().get("daurl").getAsString() : "sirene_2";
+        this.daurl = getConfig().has("daurl") ? getConfig().get("daurl").getAsString() : "http";
     }
 
     @Override

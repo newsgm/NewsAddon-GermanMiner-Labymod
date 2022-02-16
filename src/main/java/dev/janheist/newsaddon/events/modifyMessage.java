@@ -29,10 +29,6 @@ public class modifyMessage implements MessageModifyChatEvent {
     public Object onModifyChatMessage(Object o) {
         try {
             ITextComponent cct = (ITextComponent) o;
-            System.out.println("Format: " + cct.getFormattedText());
-            System.out.println("sFormat: " + cct.getUnformattedComponentText());
-
-
 
             String unformattedText = cct.getUnformattedText();
             String   formattedText = cct.getFormattedText();
