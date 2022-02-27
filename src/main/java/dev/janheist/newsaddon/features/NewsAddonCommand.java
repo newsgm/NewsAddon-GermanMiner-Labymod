@@ -108,6 +108,9 @@ public class NewsAddonCommand {
         } else if(args[1].equals("update")) {
             pUtils.displayPrefix("§aPrüfe in 10 Sekunden auf Updates. Sollte ein Update verfügbar sein, wirst du benachrichtigt.");
             UpdateChecker.initialize(newsAddon.VERSION);
+        } else if(args[1].equals("reinstall")) {
+            pUtils.displayPrefix("§aInstalliere aktuelles Addon in wenigen Sekunden neu.");
+            UpdateChecker.initialize(0);
         } else {
             pUtils.displayPrefix("");
             pUtils.displayPrefix("§aAktuelle Version: " + newsAddon.VERSION);
