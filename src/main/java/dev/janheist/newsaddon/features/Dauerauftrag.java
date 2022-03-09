@@ -3,12 +3,20 @@ package dev.janheist.newsaddon.features;
 import dev.janheist.newsaddon.main.NewsAddon;
 import dev.janheist.newsaddon.timer.DauerauftragTimer;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import javax.net.ssl.*;
+import java.io.*;
 import java.net.URL;
 import java.net.URLConnection;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.security.KeyManagementException;
+import java.security.KeyStore;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.security.cert.Certificate;
+import java.security.cert.CertificateFactory;
+import java.security.cert.X509Certificate;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -18,9 +26,13 @@ import java.util.Date;
 import java.util.TimeZone;
 import java.util.Timer;
 
+import javax.net.ssl.HttpsURLConnection;
+
+
 public class Dauerauftrag {
     NewsAddon newsAddon;
     public int current_version = 0;
+    private static SSLContext sslContext;
 
     public Dauerauftrag(NewsAddon newsAddon) { this.newsAddon = newsAddon; }
 
@@ -33,9 +45,22 @@ public class Dauerauftrag {
 
             URL url = new URL("" + newsAddon.daurl);
 
-            URLConnection con = url.openConnection();
-            InputStream is = con.getInputStream();
-            BufferedReader br = new BufferedReader(new InputStreamReader(is));
+            InputStream is;
+            BufferedReader br;
+            if(newsAddon.daurl.toLowerCase().startsWith("https")) {
+
+
+
+
+                HttpsURLConnection con = (HttpsURLConnection) url.openConnection();
+                con.setSSLSocketFactory(getSocketFactory());
+                is = con.getInputStream();
+            } else {
+                URLConnection con = url.openConnection();
+                is = con.getInputStream();
+            }
+            br = new BufferedReader(new InputStreamReader(is));
+
 
             String line = null;
             String prefix = getPrefix(now.getDay());
@@ -67,6 +92,27 @@ public class Dauerauftrag {
             }
         }
 
+    }
+
+    public static SSLSocketFactory getSocketFactory() {
+        if (sslContext == null) {
+            TrustManager[] trustAllCerts = { new X509TrustManager() {
+                public X509Certificate[] getAcceptedIssuers() {
+                    return null;
+                }
+
+                public void checkClientTrusted(X509Certificate[] certs, String authType) {}
+
+                public void checkServerTrusted(X509Certificate[] certs, String authType) {}
+            } };
+            try {
+                sslContext = SSLContext.getInstance("SSL");
+                sslContext.init(null, trustAllCerts, new SecureRandom());
+            } catch (KeyManagementException|java.security.NoSuchAlgorithmException e) {
+                e.printStackTrace();
+            }
+        }
+        return sslContext.getSocketFactory();
     }
 
     private String getPrefix(int date) {
