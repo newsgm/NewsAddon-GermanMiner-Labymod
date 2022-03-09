@@ -4,6 +4,8 @@
     <list default="true" id="73361c94-1ecf-4468-8bcf-7a7db8b49ef9" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/Addon.iws" beforeDir="false" afterPath="$PROJECT_DIR$/Addon.iws" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dev/janheist/newsaddon/features/Dauerauftrag.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/janheist/newsaddon/features/Dauerauftrag.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/janheist/newsaddon/features/PlayerUtilities.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/janheist/newsaddon/features/PlayerUtilities.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/janheist/newsaddon/modules/UpdateChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/janheist/newsaddon/modules/UpdateChecker.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -249,7 +251,7 @@
       <workItem from="1645020320204" duration="2533000" />
       <workItem from="1645026100392" duration="52000" />
       <workItem from="1645960450666" duration="1753000" />
-      <workItem from="1646830958406" duration="3423000" />
+      <workItem from="1646830958406" duration="4422000" />
     </task>
     <servers />
   </component>

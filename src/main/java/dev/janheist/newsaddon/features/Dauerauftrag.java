@@ -32,7 +32,6 @@ import javax.net.ssl.HttpsURLConnection;
 public class Dauerauftrag {
     NewsAddon newsAddon;
     public int current_version = 0;
-    private static SSLContext sslContext;
 
     public Dauerauftrag(NewsAddon newsAddon) { this.newsAddon = newsAddon; }
 
@@ -53,7 +52,7 @@ public class Dauerauftrag {
 
 
                 HttpsURLConnection con = (HttpsURLConnection) url.openConnection();
-                con.setSSLSocketFactory(getSocketFactory());
+                con.setSSLSocketFactory(PlayerUtilities.getSocketFactory());
                 is = con.getInputStream();
             } else {
                 URLConnection con = url.openConnection();
@@ -92,27 +91,6 @@ public class Dauerauftrag {
             }
         }
 
-    }
-
-    public static SSLSocketFactory getSocketFactory() {
-        if (sslContext == null) {
-            TrustManager[] trustAllCerts = { new X509TrustManager() {
-                public X509Certificate[] getAcceptedIssuers() {
-                    return null;
-                }
-
-                public void checkClientTrusted(X509Certificate[] certs, String authType) {}
-
-                public void checkServerTrusted(X509Certificate[] certs, String authType) {}
-            } };
-            try {
-                sslContext = SSLContext.getInstance("SSL");
-                sslContext.init(null, trustAllCerts, new SecureRandom());
-            } catch (KeyManagementException|java.security.NoSuchAlgorithmException e) {
-                e.printStackTrace();
-            }
-        }
-        return sslContext.getSocketFactory();
     }
 
     private String getPrefix(int date) {
