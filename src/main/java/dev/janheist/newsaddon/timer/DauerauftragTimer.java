@@ -1,5 +1,6 @@
 package dev.janheist.newsaddon.timer;
 
+import dev.janheist.newsaddon.features.Dauerauftrag;
 import dev.janheist.newsaddon.features.PlayerUtilities;
 import dev.janheist.newsaddon.main.NewsAddon;
 import net.labymod.core.LabyModCore;
@@ -13,15 +14,20 @@ import java.util.TimerTask;
 
 public class DauerauftragTimer extends TimerTask {
     NewsAddon newsAddon;
+    Dauerauftrag dauerauftrag;
+    private int version;
 
-    public DauerauftragTimer(NewsAddon newsAddon) {
+    public DauerauftragTimer(NewsAddon newsAddon, Dauerauftrag dauerauftrag, int version) {
         this.newsAddon = newsAddon;
+        this.dauerauftrag = dauerauftrag;
+        this.version = version;
     }
 
     @Override
     public void run() {
         try {
-            if (newsAddon.DEBUGMODE || LabyMod.getInstance().getCurrentServerData().getIp().toLowerCase().contains("germanminer")) {
+            if (version == dauerauftrag.current_version &&
+                    (newsAddon.DEBUGMODE || LabyMod.getInstance().getCurrentServerData().getIp().toLowerCase().contains("germanminer"))) {
                 PlayerUtilities pUtils = new PlayerUtilities();
                 pUtils.displayPrefix("§a§lEventuell muss ein Dauerauftrag geschaltet werden!");
 
