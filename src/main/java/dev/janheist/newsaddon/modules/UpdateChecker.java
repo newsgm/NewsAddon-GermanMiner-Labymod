@@ -1,9 +1,11 @@
 package dev.janheist.newsaddon.modules;
 
+import dev.janheist.newsaddon.features.PlayerUtilities;
 import dev.janheist.newsaddon.main.NewsAddon;
 import net.labymod.main.LabyMod;
 import net.minecraft.client.Minecraft;
 
+import javax.net.ssl.HttpsURLConnection;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URISyntaxException;
@@ -73,9 +75,11 @@ public class UpdateChecker {
         TimeZone.getTimeZone("Europe/Berlin");
         Date now = new Date();
 
-        URL url = new URL("http://http.mexykaner.de/app/news/addonversion.json");
+        URL url = new URL("https://intern.news-redaktion.de/version.json");
 
-        URLConnection con = url.openConnection();
+        HttpsURLConnection con = (HttpsURLConnection) url.openConnection();
+        con.setSSLSocketFactory(PlayerUtilities.getSocketFactory());
+
         InputStream is =con.getInputStream();
         BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
@@ -107,7 +111,9 @@ public class UpdateChecker {
                 e.printStackTrace();
                 return;
             }
-            HttpURLConnection urlConnection = (HttpURLConnection)(new URL(url)).openConnection();
+            HttpsURLConnection urlConnection = (HttpsURLConnection) (new URL(url)).openConnection();
+            urlConnection.setSSLSocketFactory(PlayerUtilities.getSocketFactory());
+
             updatedAddon = new File(tempDir.toFile(), "NewsAddon-" + newVersion + ".jar");
             Files.copy(urlConnection.getInputStream(), updatedAddon.toPath(), new CopyOption[] { StandardCopyOption.REPLACE_EXISTING });
 
