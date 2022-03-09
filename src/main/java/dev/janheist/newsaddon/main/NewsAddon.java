@@ -41,7 +41,7 @@ public class NewsAddon extends LabyModAddon {
     public boolean scanner;
 
     public Dauerauftrag dauerauftrag = new Dauerauftrag(this);
-    private PlayerUtilities pUtils = new PlayerUtilities();
+    private final PlayerUtilities pUtils = new PlayerUtilities();
 
     public boolean sound90;
     public String sound90ausw;

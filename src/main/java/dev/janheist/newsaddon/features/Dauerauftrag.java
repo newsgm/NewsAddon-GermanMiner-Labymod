@@ -20,12 +20,13 @@ import java.util.Timer;
 
 public class Dauerauftrag {
     NewsAddon newsAddon;
+    public int current_version = 0;
 
-    public Dauerauftrag(NewsAddon newsAddon) {
-        this.newsAddon = newsAddon;
-    }
+    public Dauerauftrag(NewsAddon newsAddon) { this.newsAddon = newsAddon; }
 
     public void init() throws IOException, ParseException {
+        current_version++;
+        newsAddon.das.clear();
         if(newsAddon.daurl.toLowerCase().startsWith("http") && newsAddon.daurl.length() > 8) {
             TimeZone.getTimeZone("Europe/Berlin");
             Date now = new Date();
@@ -54,7 +55,7 @@ public class Dauerauftrag {
                             String dateString = createDate() + " " + line + ":00";
                             Date date = dateFormatter.parse(dateString);
                             Timer daTimer = new Timer();
-                            daTimer.schedule(new DauerauftragTimer(newsAddon), date);
+                            daTimer.schedule(new DauerauftragTimer(newsAddon, this, current_version), date);
                             newsAddon.das.add(dateString);
 
                             System.out.println("[NEWS-DEBUG] registered DA at " + dateString);
