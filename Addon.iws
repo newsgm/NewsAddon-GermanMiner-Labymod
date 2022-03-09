@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="73361c94-1ecf-4468-8bcf-7a7db8b49ef9" name="Default Changelist" comment="" />
+    <list default="true" id="73361c94-1ecf-4468-8bcf-7a7db8b49ef9" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/Addon.iws" beforeDir="false" afterPath="$PROJECT_DIR$/Addon.iws" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/janheist/newsaddon/features/Dauerauftrag.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/janheist/newsaddon/features/Dauerauftrag.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/janheist/newsaddon/features/NewsAddonCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/janheist/newsaddon/features/NewsAddonCommand.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -170,13 +174,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -247,6 +253,7 @@
       <workItem from="1645026100392" duration="52000" />
       <workItem from="1645960450666" duration="1753000" />
       <workItem from="1646830958406" duration="4581000" />
+      <workItem from="1646835794596" duration="1823000" />
     </task>
     <servers />
   </component>

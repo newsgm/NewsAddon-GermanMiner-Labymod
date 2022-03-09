@@ -111,12 +111,7 @@ public class NewsAddonCommand {
         } else if(args[1].equals("reload")) {
             try {
                 newsAddon.dauerauftrag.init();
-
-                pUtils.displayPrefix("§aFolgende DAs sind nun abgespeichert:");
-                for(String item : newsAddon.das) {
-                    pUtils.displayPrefix("§a" + item);
-                }
-                pUtils.displayPrefix("");
+                pUtils.displayPrefix("§aDAs zu " + newsAddon.das.size() + " Zeiten gespeichert.");
             } catch (IOException | ParseException e) {
                 e.printStackTrace();
             }

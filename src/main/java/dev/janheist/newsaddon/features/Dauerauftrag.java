@@ -48,9 +48,6 @@ public class Dauerauftrag {
             BufferedReader br;
             if(newsAddon.daurl.toLowerCase().startsWith("https")) {
 
-
-
-
                 HttpsURLConnection con = (HttpsURLConnection) url.openConnection();
                 con.setSSLSocketFactory(PlayerUtilities.getSocketFactory());
                 is = con.getInputStream();
