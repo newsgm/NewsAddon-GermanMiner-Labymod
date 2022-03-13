@@ -40,7 +40,7 @@ public class onSend implements MessageSendEvent {
         } else if(args.length == 3 && s.startsWith("/newsaddon auktion ") || s.startsWith("/newsaddon auction ")) {
             auctions.startAuction(Arrays.copyOfRange(args, 2, args.length));
         } else if(s.startsWith("/newsaddon")) {
-            if(s.equals("/newsaddon"))
+            if(s.split(" ").length == 1)
                 s = s.concat(" help");
             addonCommand.init(s);
             return true;
