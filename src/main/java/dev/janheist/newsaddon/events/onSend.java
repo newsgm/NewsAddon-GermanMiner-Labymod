@@ -3,6 +3,7 @@ package dev.janheist.newsaddon.events;
 import dev.janheist.newsaddon.features.Auktionen;
 import dev.janheist.newsaddon.features.NewsAddonCommand;
 import dev.janheist.newsaddon.features.Show;
+import dev.janheist.newsaddon.features.nfCommand;
 import dev.janheist.newsaddon.main.NewsAddon;
 import net.labymod.api.events.MessageSendEvent;
 
@@ -14,10 +15,12 @@ public class onSend implements MessageSendEvent {
     Auktionen auctions = new Auktionen();
     Show sendInChat = new Show();
     NewsAddonCommand addonCommand;
+    nfCommand nfcmd;
 
     public onSend(NewsAddon newsAddon) {
         this.newsAddon = newsAddon;
         this.addonCommand = new NewsAddonCommand(newsAddon);
+        this.nfcmd = new nfCommand(newsAddon);
     }
 
     @Override
@@ -43,6 +46,22 @@ public class onSend implements MessageSendEvent {
             if(s.split(" ").length == 1)
                 s = s.concat(" help");
             addonCommand.init(s);
+            return true;
+        } else if(s.startsWith("/nf") || s.startsWith("--")) {
+            try {
+                if(orig.startsWith("-- ")) {
+                    orig = orig.substring(3);
+                    orig = "/nf " + orig;
+                } else if(orig.startsWith("--")) {
+                    orig = orig.substring(2);
+                    orig = "/nf " + orig;
+                }
+                if (orig.split(" ").length == 1)
+                    orig = orig.concat(" veryUnusualStringThatAPlayerWouldSendToTheServer");
+                nfcmd.init(orig);
+            } catch (NullPointerException ex) {
+                ex.printStackTrace();
+            }
             return true;
         }
 
