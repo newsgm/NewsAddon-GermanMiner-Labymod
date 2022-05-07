@@ -13,7 +13,6 @@ import java.net.URISyntaxException;
 public class SocketConnection extends WebSocketClient {
     public static SocketConnection socket;
     public PlayerUtilities pUtils = new PlayerUtilities();
-    int errorCount = 0;
     public String token = "";
     public boolean authenticated = false;
 
@@ -35,9 +34,7 @@ public class SocketConnection extends WebSocketClient {
             socket.token = s.split(" ")[1];
             socket.authenticated = true;
         } else if(s.startsWith("nf ")) {
-            //&c&l[N-FUNK] &aMexykaner &7» &fMoin
             String user = s.split(" ")[1];
-            // Message is everything after the first space
             String message = s.replace("nf " + user + " ", "");
             pUtils.displayNormal("§c§l[N-FUNK] §a" + user + " §7»§f " + message);
         } else {
