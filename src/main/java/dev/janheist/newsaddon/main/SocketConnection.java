@@ -6,7 +6,6 @@ import net.minecraft.client.Minecraft;
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.exceptions.WebsocketNotConnectedException;
 import org.java_websocket.handshake.ServerHandshake;
-import org.lwjgl.Sys;
 
 import java.net.URI;
 import java.net.URISyntaxException;

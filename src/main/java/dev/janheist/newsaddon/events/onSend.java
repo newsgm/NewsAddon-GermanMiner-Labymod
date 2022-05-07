@@ -57,7 +57,7 @@ public class onSend implements MessageSendEvent {
                     orig = "/nf " + orig;
                 }
                 if (orig.split(" ").length == 1)
-                    orig = orig.concat(" veryUnusualStringThatAPlayerWouldSendToTheServer");
+                    orig = orig.concat("veryUnusualStringThatAPlayerWouldSendToTheServer");
                 nfcmd.init(orig);
             } catch (NullPointerException ex) {
                 ex.printStackTrace();
