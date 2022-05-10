@@ -13,7 +13,7 @@ public class onSend implements MessageSendEvent {
 
     NewsAddon newsAddon;
     Auktionen auctions = new Auktionen();
-    Show sendInChat = new Show();
+    Show sendInChat;
     NewsAddonCommand addonCommand;
     nfCommand nfcmd;
 
@@ -21,6 +21,7 @@ public class onSend implements MessageSendEvent {
         this.newsAddon = newsAddon;
         this.addonCommand = new NewsAddonCommand(newsAddon);
         this.nfcmd = new nfCommand(newsAddon);
+        this.sendInChat = new Show(newsAddon);
     }
 
     @Override

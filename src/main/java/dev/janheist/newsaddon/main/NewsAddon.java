@@ -55,6 +55,7 @@ public class NewsAddon extends LabyModAddon {
     public boolean autoconnectgm;
     public String daurl;
     private boolean gotDA = false;
+    public String last_scanned_name;
 
     public PlayerUtilities getpUtils() {
         return pUtils;
