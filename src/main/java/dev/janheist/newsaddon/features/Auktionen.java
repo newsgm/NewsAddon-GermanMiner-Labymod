@@ -34,6 +34,7 @@ public class Auktionen {
         itemTexte.add("Als letztes bräuchte ich bitte einmal deine Kontonummer und das Item mit den 500€ Auktionsgebühr über das Handelsmenü.");
 
         gsTexte.add("Bist du dir bewusst, dass die Auktion anfangs 500€ kostet? Weiterhin fallen 3% vom Gewinn Auktionsgebühr an, sofern die Region versteigert wird.");
+        gsTexte.add("Bei einer Grundstücksauktion wird die Auktion im Forum erst veröffentlicht, nachdem du das Grundstück an unsere Fraktionsleitung übertragen hast.");
         gsTexte.add("In welchem Stadtteil befindet sich die Region und wie ist die ID (mie-/kau-ID)?");
         gsTexte.add("Wie ist der Grundpreis (Staat) und wie hoch sind die Grundsteuern?");
         gsTexte.add("Kennst du die Maße der Region?");
@@ -42,6 +43,7 @@ public class Auktionen {
         gsTexte.add("Welche Summe soll für den Sofortkauf bestimmt werden?");
         gsTexte.add("In welchen Schritten sollen die Spieler mindestens bieten?");
         gsTexte.add("Dann bekomme ich bitte noch deine Kontonummer und die 500€ Auktionsgebühr.");
+        gsTexte.add("Zuletzt müsstest du bitte noch einen Vertrag unterzeichnen (/vertrag).");
 
         bizTexte.add("Bist du dir bewusst, dass die Auktion anfangs 500€ kostet? Weiterhin fallen 3% vom Gewinn Auktionsgebühr an, sofern das BIZ versteigert wird.");
         bizTexte.add("Welche Art von BIZ möchtest du versteigern und in welcher Region befindet es sich?");
@@ -51,6 +53,7 @@ public class Auktionen {
         bizTexte.add("Welche Summe soll für den Sofortkauf bestimmt werden?");
         bizTexte.add("In welchen Schritten sollen die Spieler mindestens bieten?");
         bizTexte.add("Dann bekomme ich bitte noch deine Kontonummer und die 500€ Auktionsgebühr.");
+        bizTexte.add("Zuletzt müsstest du bitte noch einen Vertrag unterzeichnen (/vertrag).");
 
         autoTexte.add("Bist du dir bewusst, dass die Auktion anfangs 500€ kostet? Weiterhin fallen 3% vom Gewinn Auktionsgebühr an, sofern das Vehicle versteigert wird.");
         autoTexte.add("Von welcher Marke ist das Vehicle und welches Modell ist es?");
@@ -63,6 +66,7 @@ public class Auktionen {
         autoTexte.add("In welchen Schritten sollen die Spieler mindestens bieten?");
         autoTexte.add("Kennst du den aktuellen Neupreis des Vehicles?");
         autoTexte.add("Dann bräuchte ich bitte einmal deine Kontonummer und den Vehicle-Schlüssel mit den 500€ Auktionsgebühr über das Handelsmenü.");
+        autoTexte.add("Zuletzt müsstest du bitte noch einen Vertrag unterzeichnen (/vertrag).");
 
         codeTexte.add("Bist du dir bewusst, dass die Auktion anfangs 500€ kostet? Weiterhin fallen 3% vom Gewinn Auktionsgebühr an, sofern der Gutschein versteigert wird.");
         codeTexte.add("An welchem Tag und zu welcher Uhrzeit soll die Auktion enden? (Maximal bis zum " + latestEnd + ")");
@@ -70,6 +74,7 @@ public class Auktionen {
         codeTexte.add("Welche Summe soll für den Sofortkauf bestimmt werden?");
         codeTexte.add("In welchen Schritten sollen die Spieler mindestens bieten?");
         codeTexte.add("Dann bräuchte ich bitte einmal deine Kontonummer und die 500€ Auktionsgebühr.");
+        codeTexte.add("Zuletzt müsstest du bitte noch einen Vertrag unterzeichnen (/vertrag).");
 
     }
 
