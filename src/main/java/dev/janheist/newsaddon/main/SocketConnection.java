@@ -78,7 +78,7 @@ public class SocketConnection extends WebSocketClient {
         if (socket != null)
             return;
         try {
-            socket = new SocketConnection(new URI("ws://news-redaktion.de:8181"));
+            socket = new SocketConnection(new URI(NewsAddon.ws));
         } catch (URISyntaxException e) {
             e.printStackTrace();
             return;
