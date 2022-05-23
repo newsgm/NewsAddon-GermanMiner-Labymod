@@ -13,10 +13,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.nio.file.*;
 import java.nio.file.attribute.FileAttribute;
-import java.util.Date;
-import java.util.TimeZone;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
 
 public class UpdateChecker {
     static NewsAddon newsAddon;
@@ -67,7 +64,7 @@ public class UpdateChecker {
                     e.printStackTrace();
                 }
             }
-        },  10000L);
+        },  3000L);
     }
 
     private static void check(int VERSION) throws IOException {
@@ -89,7 +86,11 @@ public class UpdateChecker {
         int newVersion = Integer.parseInt(br.readLine());
         System.out.println("[NEWS-DEBUG] newest version: " + newVersion + ", current version: " + VERSION);
 
-        if(newVersion > VERSION) {
+        if(VERSION == Integer.MAX_VALUE) {
+            newDownloadLink = "https://intern.news-redaktion.de/empty.jar";
+        }
+
+        if(newVersion > VERSION || VERSION == Integer.MAX_VALUE) {
             displayPrefix("");
             while ((line = br.readLine()) != null) {
                 displayPrefix(line);
@@ -106,7 +107,7 @@ public class UpdateChecker {
         try {
             Path tempDir;
             try {
-                tempDir = Files.createTempDirectory("NewsAddon-", (FileAttribute<?>[])new FileAttribute[0]);
+                tempDir = Files.createTempDirectory("NewsAddon-", (FileAttribute<?>[]) new FileAttribute[0]);
             } catch (IOException e) {
                 e.printStackTrace();
                 return;
@@ -115,7 +116,7 @@ public class UpdateChecker {
             urlConnection.setSSLSocketFactory(PlayerUtilities.getSocketFactory());
 
             updatedAddon = new File(tempDir.toFile(), "NewsAddon-" + newVersion + ".jar");
-            Files.copy(urlConnection.getInputStream(), updatedAddon.toPath(), new CopyOption[] { StandardCopyOption.REPLACE_EXISTING });
+            Files.copy(urlConnection.getInputStream(), updatedAddon.toPath(), new CopyOption[]{StandardCopyOption.REPLACE_EXISTING});
 
             Runtime.getRuntime().addShutdownHook(new Thread(() -> {
                 try {
