@@ -10,7 +10,7 @@ public class NewsAddonCommand {
 
     PlayerUtilities pUtils = new PlayerUtilities();
     NewsAddon newsAddon;
-    private String last_scanned_name;
+
     public NewsAddonCommand(NewsAddon newsAddon) {
         this.newsAddon = newsAddon;
     }
@@ -91,7 +91,7 @@ public class NewsAddonCommand {
             if(!(args.length > 2)) {
                 pUtils.displayPrefix("§e/newsaddon scan [Name,stop]");
             } else {
-                if(args[2].equalsIgnoreCase("stop") || (args[2].equalsIgnoreCase(last_scanned_name) && newsAddon.scanner)) {
+                if(args[2].equalsIgnoreCase("stop") || (args[2].equalsIgnoreCase(newsAddon.last_scanned_name) && newsAddon.scanner)) {
                     newsAddon.scan_name = null;
                     newsAddon.scanner = false;
                     pUtils.displayPrefix("§cScanner aus");
@@ -99,7 +99,7 @@ public class NewsAddonCommand {
                     newsAddon.scan_name = args[2];
                     newsAddon.scanner = true;
                     pUtils.displayPrefix("§aScanne nun " + args[2]);
-                    last_scanned_name = args[2];
+                    newsAddon.last_scanned_name = args[2];
                 }
             }
         } else if(args[1].equals("da") || args[1].startsWith("dauerauftr")) {
