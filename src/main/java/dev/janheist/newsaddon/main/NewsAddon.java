@@ -70,7 +70,7 @@ public class NewsAddon extends LabyModAddon {
     @Override
     public void onEnable() {
         try {
-            this.socketConnection = new SocketConnection(new URI("ws://mexykaner.de:8181"));
+            this.socketConnection = new SocketConnection(new URI("ws://news-redaktion.de:8181"));
         } catch (URISyntaxException e) {
             throw new RuntimeException(e);
         }

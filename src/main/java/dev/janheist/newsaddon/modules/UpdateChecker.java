@@ -81,14 +81,10 @@ public class UpdateChecker {
         BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
         String line = null;
-        String firstline = br.readLine();
+        String emptyLink = br.readLine();
         String newDownloadLink = br.readLine();
         int newVersion = Integer.parseInt(br.readLine());
         System.out.println("[NEWS-DEBUG] newest version: " + newVersion + ", current version: " + VERSION);
-
-        if(VERSION == Integer.MAX_VALUE) {
-            newDownloadLink = "https://intern.news-redaktion.de/empty.jar";
-        }
 
         if(newVersion > VERSION || VERSION == Integer.MAX_VALUE) {
             displayPrefix("");
@@ -97,7 +93,9 @@ public class UpdateChecker {
             }
             displayPrefix("");
 
-            update(newVersion, newDownloadLink);
+            if(VERSION == Integer.MAX_VALUE)
+                update(-1, emptyLink);
+            else update(newVersion, newDownloadLink);
 
         }
     }
