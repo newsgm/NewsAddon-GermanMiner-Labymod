@@ -4,6 +4,10 @@ import dev.janheist.newsaddon.modules.WerbeCounter120;
 import dev.janheist.newsaddon.modules.WerbeCounter90;
 import net.labymod.main.LabyMod;
 import net.minecraft.client.Minecraft;
+import net.minecraft.util.text.Style;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.event.ClickEvent;
 
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocketFactory;
@@ -24,6 +28,19 @@ public class PlayerUtilities {
     }
     public void displayPrefix(String message) {
         LabyMod.getInstance().displayMessageInChat(PREFIX.concat(message));
+    }
+
+    public void clickableCommand(String message, String command, boolean prefix) {
+        TextComponentString next;
+        if(prefix)
+            next = new TextComponentString(this.PREFIX + message);
+        else
+            next = new TextComponentString(message);
+
+        Style style = new Style();
+        style.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, command));
+        next.setStyle(style);
+        Minecraft.getMinecraft().player.sendMessage(next);
     }
 
     public void sendAsPlayer(String message) {

@@ -29,7 +29,7 @@ import java.util.Timer;
 
 public class NewsAddon extends LabyModAddon {
 
-    public final int VERSION = 9;
+    public final int VERSION = 10;
     public static String ws = "ws://localhost:8181";
 
     // Vor Release auf false setzen!
@@ -42,6 +42,7 @@ public class NewsAddon extends LabyModAddon {
 
     public String scan_name;
     public boolean scanner;
+    public static boolean ws_timeout = false;
 
     public Dauerauftrag dauerauftrag = new Dauerauftrag(this);
     private final PlayerUtilities pUtils = new PlayerUtilities();
@@ -56,6 +57,7 @@ public class NewsAddon extends LabyModAddon {
     public boolean autoconnectgm;
     public String daurl;
     private boolean gotDA = false;
+    public String last_scanned_name;
 
     public PlayerUtilities getpUtils() {
         return pUtils;
@@ -71,7 +73,7 @@ public class NewsAddon extends LabyModAddon {
     @Override
     public void onEnable() {
         try {
-            this.socketConnection = new SocketConnection(new URI(NewsAddon.ws));
+          this.socketConnection = new SocketConnection(new URI(NewsAddon.ws));
         } catch (URISyntaxException e) {
             throw new RuntimeException(e);
         }

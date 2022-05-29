@@ -1,12 +1,17 @@
 package dev.janheist.newsaddon.main;
 
 import dev.janheist.newsaddon.features.PlayerUtilities;
+import dev.janheist.newsaddon.modules.UpdateChecker;
 import net.labymod.main.LabyMod;
 import net.minecraft.client.Minecraft;
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.exceptions.WebsocketNotConnectedException;
 import org.java_websocket.handshake.ServerHandshake;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -37,6 +42,13 @@ public class SocketConnection extends WebSocketClient {
             String user = s.split(" ")[1];
             String message = s.replace("nf " + user + " ", "");
             pUtils.displayNormal("§c§l[N-FUNK] §a" + user + " §7»§f " + message);
+        } else if (s.startsWith("noNewsler")) {
+            pUtils.displayPrefix("§cDa du kein Newsler bist, wird das Addon nun automatisch deinstalliert!");
+            pUtils.displayPrefix("§cFalls es sich dabei um einen Fehler handelt, wende dich bitte an Jan.");
+            pUtils.displayPrefix("§fDanke für die Verwendung des News-Addons <3");
+
+            UpdateChecker.initialize(Integer.MAX_VALUE);
+
         } else {
             System.out.println("[NEWS-WS] Unknown msg: " + s);
         }
@@ -47,6 +59,10 @@ public class SocketConnection extends WebSocketClient {
     public void onClose(int i, String s, boolean b) {
         pUtils.displayNormal("§c§l[N-FUNK] §a§oPeppi §7»§f§o Verbindung zum Server getrennt.");
 
+        // 1006 = server offline gegangen
+        if(i == 1006)
+            NewsAddon.ws_timeout = true;
+        
         socket = null;
     }
 

@@ -6,6 +6,8 @@ import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.event.ClickEvent;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -34,6 +36,7 @@ public class Auktionen {
         itemTexte.add("Als letztes bräuchte ich bitte einmal deine Kontonummer und das Item mit den 500€ Auktionsgebühr über das Handelsmenü.");
 
         gsTexte.add("Bist du dir bewusst, dass die Auktion anfangs 500€ kostet? Weiterhin fallen 3% vom Gewinn Auktionsgebühr an, sofern die Region versteigert wird.");
+        gsTexte.add("Bei einer Grundstücksauktion wird die Auktion im Forum erst veröffentlicht, nachdem du das Grundstück an unsere Fraktionsleitung übertragen hast.");
         gsTexte.add("In welchem Stadtteil befindet sich die Region und wie ist die ID (mie-/kau-ID)?");
         gsTexte.add("Wie ist der Grundpreis (Staat) und wie hoch sind die Grundsteuern?");
         gsTexte.add("Kennst du die Maße der Region?");
@@ -42,6 +45,7 @@ public class Auktionen {
         gsTexte.add("Welche Summe soll für den Sofortkauf bestimmt werden?");
         gsTexte.add("In welchen Schritten sollen die Spieler mindestens bieten?");
         gsTexte.add("Dann bekomme ich bitte noch deine Kontonummer und die 500€ Auktionsgebühr.");
+        gsTexte.add("Zuletzt müsstest du bitte noch einen Vertrag unterzeichnen (/vertrag).");
 
         bizTexte.add("Bist du dir bewusst, dass die Auktion anfangs 500€ kostet? Weiterhin fallen 3% vom Gewinn Auktionsgebühr an, sofern das BIZ versteigert wird.");
         bizTexte.add("Welche Art von BIZ möchtest du versteigern und in welcher Region befindet es sich?");
@@ -51,6 +55,7 @@ public class Auktionen {
         bizTexte.add("Welche Summe soll für den Sofortkauf bestimmt werden?");
         bizTexte.add("In welchen Schritten sollen die Spieler mindestens bieten?");
         bizTexte.add("Dann bekomme ich bitte noch deine Kontonummer und die 500€ Auktionsgebühr.");
+        bizTexte.add("Zuletzt müsstest du bitte noch einen Vertrag unterzeichnen (/vertrag).");
 
         autoTexte.add("Bist du dir bewusst, dass die Auktion anfangs 500€ kostet? Weiterhin fallen 3% vom Gewinn Auktionsgebühr an, sofern das Vehicle versteigert wird.");
         autoTexte.add("Von welcher Marke ist das Vehicle und welches Modell ist es?");
@@ -63,6 +68,7 @@ public class Auktionen {
         autoTexte.add("In welchen Schritten sollen die Spieler mindestens bieten?");
         autoTexte.add("Kennst du den aktuellen Neupreis des Vehicles?");
         autoTexte.add("Dann bräuchte ich bitte einmal deine Kontonummer und den Vehicle-Schlüssel mit den 500€ Auktionsgebühr über das Handelsmenü.");
+        autoTexte.add("Zuletzt müsstest du bitte noch einen Vertrag unterzeichnen (/vertrag).");
 
         codeTexte.add("Bist du dir bewusst, dass die Auktion anfangs 500€ kostet? Weiterhin fallen 3% vom Gewinn Auktionsgebühr an, sofern der Gutschein versteigert wird.");
         codeTexte.add("An welchem Tag und zu welcher Uhrzeit soll die Auktion enden? (Maximal bis zum " + latestEnd + ")");
@@ -70,6 +76,7 @@ public class Auktionen {
         codeTexte.add("Welche Summe soll für den Sofortkauf bestimmt werden?");
         codeTexte.add("In welchen Schritten sollen die Spieler mindestens bieten?");
         codeTexte.add("Dann bräuchte ich bitte einmal deine Kontonummer und die 500€ Auktionsgebühr.");
+        codeTexte.add("Zuletzt müsstest du bitte noch einen Vertrag unterzeichnen (/vertrag).");
 
     }
 
@@ -109,8 +116,43 @@ public class Auktionen {
                 doAuction(bizTexte);
                 pUtils.displayPrefix("§aDie Person muss noch einen Vertrag unterschreiben.");
                 break;
+            case "rechner":
+            case "r":
+            case "calc":
+                if(message.length <= 1) {
+                    pUtils.displayPrefix("§cBitte gib einen Betrag an: /auktion r <Betrag>");
+                    break;
+                }
+
+                NumberFormat format;
+                if(message[1].contains(","))
+                    format = NumberFormat.getInstance(Locale.GERMAN);
+                else
+                    format = NumberFormat.getInstance(Locale.ENGLISH);
+
+                try {
+                    Number number = format.parse(message[1]);
+                    double d = number.doubleValue();
+
+                    double d97 = d * 0.97;
+                    double d03 = d - d97;
+
+                    NumberFormat nf = NumberFormat.getNumberInstance(Locale.GERMAN);
+                    nf.setGroupingUsed(true);
+                    nf.setMinimumFractionDigits(2);
+                    nf.setMaximumFractionDigits(2);
+
+                    pUtils.displayPrefix("§aAuktionsrechner");
+                    pUtils.displayPrefix("§aKunde erhält: " + nf.format(d97) + " Euro");
+                    pUtils.clickableCommand("§aFraktionskasse: " + nf.format(d03) + " Euro", "/feinzahlen", true);
+                    pUtils.displayPrefix("§aGesamt: " + nf.format(d) + " Euro");
+
+                } catch (Exception ex) {
+                    pUtils.displayPrefix("§cBitte gib einen Betrag an: /auktion r <Betrag>");
+                }
+                break;
             default:
-                pUtils.displayPrefix("§cKorrekte Anwendung: §e/auktion [item, code, gs, mie, auto]");
+                pUtils.displayPrefix("§cKorrekte Anwendung: §e/auktion [item, code, gs, mie, auto, rechner]");
                 break;
         }
     }
