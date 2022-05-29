@@ -35,13 +35,13 @@ public class onSend implements MessageSendEvent {
         if(s.startsWith("/auction get-ticket") || s.startsWith("/auktion get-ticket") ||
             s.startsWith("/auction help") || s.startsWith("/auktion help")) {
             return false;
-        } else if(args.length == 2 && (args[0].startsWith("/auction") || args[0].startsWith("/auktion"))) {
+        } else if(args.length >= 2 && (args[0].startsWith("/auction") || args[0].startsWith("/auktion"))) {
             auctions.startAuction(Arrays.copyOfRange(args, 1, args.length));
             return true;
         } else if(s.startsWith("/newsaddon show ")) {
             sendInChat.init(orig.substring(16));
             return true;
-        } else if(args.length == 3 && s.startsWith("/newsaddon auktion ") || s.startsWith("/newsaddon auction ")) {
+        } else if(args.length >= 3 && s.startsWith("/newsaddon auktion ") || s.startsWith("/newsaddon auction ")) {
             auctions.startAuction(Arrays.copyOfRange(args, 2, args.length));
         } else if(s.startsWith("/newsaddon")) {
             if(s.split(" ").length == 1)
