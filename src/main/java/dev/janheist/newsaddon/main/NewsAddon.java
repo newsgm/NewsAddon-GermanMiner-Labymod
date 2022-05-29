@@ -30,6 +30,7 @@ import java.util.Timer;
 public class NewsAddon extends LabyModAddon {
 
     public final int VERSION = 10;
+    public static String ws = "ws://localhost:8181";
 
     // Vor Release auf false setzen!
     public final boolean DEBUGMODE = false;
@@ -72,7 +73,7 @@ public class NewsAddon extends LabyModAddon {
     @Override
     public void onEnable() {
         try {
-            this.socketConnection = new SocketConnection(new URI("ws://news-redaktion.de:8181"));
+          this.socketConnection = new SocketConnection(new URI(NewsAddon.ws));
         } catch (URISyntaxException e) {
             throw new RuntimeException(e);
         }
