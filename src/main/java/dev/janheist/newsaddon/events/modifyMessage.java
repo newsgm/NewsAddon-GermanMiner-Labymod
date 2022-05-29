@@ -56,6 +56,9 @@ public class modifyMessage implements MessageModifyChatEvent {
                 Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
                 clipboard.setContents(selection, selection);
                 pUtils.displayPrefix("§aDer Werbetext wurde in die Zwischenablage kopiert.");
+            } else if (formattedText.contains("nf wieder online") && NewsAddon.ws_timeout) {
+                newsAddon.getSocketConnection().connectSocket();
+                NewsAddon.ws_timeout = false;
             }
 
 

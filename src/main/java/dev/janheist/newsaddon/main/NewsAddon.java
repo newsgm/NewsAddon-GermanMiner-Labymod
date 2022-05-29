@@ -41,6 +41,7 @@ public class NewsAddon extends LabyModAddon {
 
     public String scan_name;
     public boolean scanner;
+    public static boolean ws_timeout = false;
 
     public Dauerauftrag dauerauftrag = new Dauerauftrag(this);
     private final PlayerUtilities pUtils = new PlayerUtilities();
