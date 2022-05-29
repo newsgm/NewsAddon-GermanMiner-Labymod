@@ -59,6 +59,10 @@ public class SocketConnection extends WebSocketClient {
     public void onClose(int i, String s, boolean b) {
         pUtils.displayNormal("§c§l[N-FUNK] §a§oPeppi §7»§f§o Verbindung zum Server getrennt.");
 
+        // 1006 = server offline gegangen
+        if(i == 1006)
+            NewsAddon.ws_timeout = true;
+        
         socket = null;
     }
 
