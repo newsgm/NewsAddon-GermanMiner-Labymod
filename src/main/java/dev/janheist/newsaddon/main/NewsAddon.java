@@ -13,9 +13,7 @@ import net.labymod.api.EventManager;
 import net.labymod.api.LabyModAddon;
 import net.labymod.main.LabyMod;
 import net.labymod.settings.elements.*;
-import net.labymod.utils.Consumer;
 import net.labymod.utils.Material;
-import net.labymod.utils.ServerData;
 import net.minecraft.client.Minecraft;
 
 import java.io.File;
@@ -58,16 +56,11 @@ public class NewsAddon extends LabyModAddon {
     public String daurl;
     private boolean gotDA = false;
     public String last_scanned_name;
-
-    public PlayerUtilities getpUtils() {
-        return pUtils;
-    }
-
     public SocketConnection socketConnection;
-
     public SocketConnection getSocketConnection() {
         return socketConnection;
     }
+    public static String lastContact = "none";
 
 
     @Override
@@ -89,23 +82,20 @@ public class NewsAddon extends LabyModAddon {
         eventManager.register(new onSend(this));
         eventManager.register(new modifyMessage(this));
         eventManager.register(new userMenuAction(this));
-        eventManager.registerOnJoin(new Consumer<ServerData>() {
-            @Override
-            public void accept(ServerData serverData) {
-                if (serverData.getIp().toLowerCase().contains("germanminer") || DEBUGMODE) {
-                    if(autoconnectgm) {
-                        getSocketConnection().connectSocket();
+        eventManager.registerOnJoin(serverData -> {
+            if (serverData.getIp().toLowerCase().contains("germanminer") || DEBUGMODE) {
+                if(autoconnectgm) {
+                    getSocketConnection().connectSocket();
+                }
+                pUtils.resetCounter();
+                try {
+                    if (!gotDA) {
+                        gotDA = true;
+                        dauerauftrag.init();
+                        UpdateChecker.initialize(VERSION);
                     }
-                    pUtils.resetCounter();
-                    try {
-                        if (!gotDA) {
-                            gotDA = true;
-                            dauerauftrag.init();
-                            UpdateChecker.initialize(VERSION);
-                        }
-                    } catch (IOException | ParseException e) {
-                        e.printStackTrace();
-                    }
+                } catch (IOException | ParseException e) {
+                    e.printStackTrace();
                 }
             }
         });

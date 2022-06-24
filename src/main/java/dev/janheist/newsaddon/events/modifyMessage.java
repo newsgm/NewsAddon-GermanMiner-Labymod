@@ -79,24 +79,18 @@ public class modifyMessage implements MessageModifyChatEvent {
     }
 
     private boolean validate(String msg) {
-        if(msg.contains("Werbetext: ") && (
-            msg.contains("Polizist") ||
-            msg.contains("Zivilist") ||
-            msg.contains("Journalist") ||
-            msg.contains("Notarzt") ||
-            msg.contains("Bandito") ||
-            msg.contains("Sureno") ||
-            msg.contains("Supporter") ||
-            msg.contains("Moderator") ||
-            msg.contains("Admin") ||
-            msg.contains("Serverleit") ||
-            msg.contains("Entwickler") ||
-            msg.contains("Bauteam")))
-        {
-            return false;
-        } else {
-            return true;
-        }
+        return !msg.contains("Werbetext: ") || (!msg.contains("Polizist") &&
+                !msg.contains("Zivilist") &&
+                !msg.contains("Journalist") &&
+                !msg.contains("Notarzt") &&
+                !msg.contains("Bandito") &&
+                !msg.contains("Sureno") &&
+                !msg.contains("Supporter") &&
+                !msg.contains("Moderator") &&
+                !msg.contains("Admin") &&
+                !msg.contains("Serverleit") &&
+                !msg.contains("Entwickler") &&
+                !msg.contains("Bauteam"));
     }
 
 }

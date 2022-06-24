@@ -55,6 +55,8 @@ public class SocketConnection extends WebSocketClient {
             if(from.equalsIgnoreCase(LabyMod.getInstance().getPlayerName()))
                 from = "mir";
 
+            NewsAddon.lastContact = (from.equalsIgnoreCase(LabyMod.getInstance().getPlayerName()) ? to : from);
+
             pUtils.displayNormal("§c§l[PM] §a" + from + " §7> §c" + to + " §7»§f " + message);
 
         } else {

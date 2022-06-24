@@ -72,6 +72,9 @@ public class onSend implements MessageSendEvent {
         } else if (s.startsWith("/newspm")) {
             newspm.init(orig);
             return true;
+        } else if (s.startsWith("/newspmr")) {
+            newspm.init(orig.replace("/newspmr", "/newspm " + NewsAddon.lastContact));
+            return true;
         }
 
         return false;
