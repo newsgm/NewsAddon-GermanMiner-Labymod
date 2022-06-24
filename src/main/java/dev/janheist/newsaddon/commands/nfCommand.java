@@ -1,5 +1,6 @@
-package dev.janheist.newsaddon.features;
+package dev.janheist.newsaddon.commands;
 
+import dev.janheist.newsaddon.features.PlayerUtilities;
 import dev.janheist.newsaddon.main.NewsAddon;
 
 public class nfCommand {
@@ -29,7 +30,7 @@ public class nfCommand {
                 newsAddon.getSocketConnection().s("nf §TOKEN§ " + message);
             }
         } catch (NullPointerException e) {
-            pUtils.displayNormal("§c§l[N-FUNK] §a§oPeppi §7»§f§o Du bist nicht mit dem Server verbunden!");
+            pUtils.displayNormal("§c§l[N-CHAT] §a§oPeppi §7»§f§o Du bist nicht mit dem Server verbunden!");
             newsAddon.getSocketConnection().connectSocket();
         }
     }

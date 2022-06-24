@@ -1,9 +1,10 @@
 package dev.janheist.newsaddon.events;
 
+import dev.janheist.newsaddon.commands.newspmCommand;
 import dev.janheist.newsaddon.features.Auktionen;
 import dev.janheist.newsaddon.features.NewsAddonCommand;
 import dev.janheist.newsaddon.features.Show;
-import dev.janheist.newsaddon.features.nfCommand;
+import dev.janheist.newsaddon.commands.nfCommand;
 import dev.janheist.newsaddon.main.NewsAddon;
 import net.labymod.api.events.MessageSendEvent;
 
@@ -16,12 +17,14 @@ public class onSend implements MessageSendEvent {
     Show sendInChat;
     NewsAddonCommand addonCommand;
     nfCommand nfcmd;
+    newspmCommand newspm;
 
     public onSend(NewsAddon newsAddon) {
         this.newsAddon = newsAddon;
         this.addonCommand = new NewsAddonCommand(newsAddon);
         this.nfcmd = new nfCommand(newsAddon);
         this.sendInChat = new Show(newsAddon);
+        this.newspm = new newspmCommand(newsAddon);
     }
 
     @Override
@@ -65,6 +68,9 @@ public class onSend implements MessageSendEvent {
             } catch (NullPointerException ex) {
                 ex.printStackTrace();
             }
+            return true;
+        } else if (s.startsWith("/newspm")) {
+            newspm.init(orig);
             return true;
         }
 

@@ -5,7 +5,6 @@ import dev.janheist.newsaddon.main.NewsAddon;
 import dev.janheist.newsaddon.modules.WerbeCounter120;
 import dev.janheist.newsaddon.modules.WerbeCounter90;
 import net.labymod.api.events.MessageModifyChatEvent;
-import net.minecraft.command.ICommandSender;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextComponentString;

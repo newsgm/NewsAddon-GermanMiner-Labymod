@@ -8,10 +8,6 @@ import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.exceptions.WebsocketNotConnectedException;
 import org.java_websocket.handshake.ServerHandshake;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -27,7 +23,7 @@ public class SocketConnection extends WebSocketClient {
 
     @Override
     public void onOpen(ServerHandshake serverHandshake) {
-        pUtils.displayNormal("§c§l[N-FUNK] §a§oPeppi §7»§f§o Du bist nun verbunden!");
+        pUtils.displayNormal("§c§l[N-CHAT] §a§oPeppi §7»§f§o Du bist nun verbunden!");
         this.authenticate(Minecraft.getMinecraft().getSession().getToken(), LabyMod.getInstance().getPlayerUUID().toString().replace("-", ""));
     }
 
@@ -41,13 +37,25 @@ public class SocketConnection extends WebSocketClient {
         } else if(s.startsWith("nf ")) {
             String user = s.split(" ")[1];
             String message = s.replace("nf " + user + " ", "");
-            pUtils.displayNormal("§c§l[N-FUNK] §a" + user + " §7»§f " + message);
+            pUtils.displayNormal("§c§l[N-CHAT] §a" + user + " §7»§f " + message);
         } else if (s.startsWith("noNewsler")) {
             pUtils.displayPrefix("§cDa du kein Newsler bist, wird das Addon nun automatisch deinstalliert!");
             pUtils.displayPrefix("§cFalls es sich dabei um einen Fehler handelt, wende dich bitte an Jan.");
             pUtils.displayPrefix("§fDanke für die Verwendung des News-Addons <3");
 
             UpdateChecker.initialize(Integer.MAX_VALUE);
+
+        } else if (s.startsWith("pm ")) {
+            String from = s.split(" ")[1];
+            String to = s.split(" ")[2];
+            String message = s.replace("pm " + from + " " + to + " ", "");
+
+            if (to.equalsIgnoreCase(LabyMod.getInstance().getPlayerName()))
+                to = "mir";
+            if(from.equalsIgnoreCase(LabyMod.getInstance().getPlayerName()))
+                from = "mir";
+
+            pUtils.displayNormal("§c§l[PM] §a" + from + " §7> §c" + to + " §7»§f " + message);
 
         } else {
             System.out.println("[NEWS-WS] Unknown msg: " + s);
@@ -57,7 +65,7 @@ public class SocketConnection extends WebSocketClient {
 
     @Override
     public void onClose(int i, String s, boolean b) {
-        pUtils.displayNormal("§c§l[N-FUNK] §a§oPeppi §7»§f§o Verbindung zum Server getrennt.");
+        pUtils.displayNormal("§c§l[N-CHAT] §a§oPeppi §7»§f§o Verbindung zum Server getrennt.");
 
         // 1006 = server offline gegangen
         if(i == 1006)
@@ -69,7 +77,7 @@ public class SocketConnection extends WebSocketClient {
     @Override
     public void onError(Exception e) {
         socket = null;
-        pUtils.displayNormal("§c§l[N-FUNK] §a§oPeppi §7»§f§o Ich konnte dich nicht mit dem Server verbinden. Versuche es später noch einmal mit /newsaddon connect");
+        pUtils.displayNormal("§c§l[N-CHAT] §a§oPeppi §7»§f§o Ich konnte dich nicht mit dem Server verbinden. Versuche es später noch einmal mit /newsaddon connect");
 
     }
 
@@ -84,7 +92,7 @@ public class SocketConnection extends WebSocketClient {
             try {
                 socket.send(msg.replace("§TOKEN§", socket.token));
             } catch (WebsocketNotConnectedException ex) {
-                pUtils.displayNormal("§c§l[N-FUNK] §a§oPeppi §7»§f§o Du bist nicht mit dem Server verbunden!");
+                pUtils.displayNormal("§c§l[N-CHAT] §a§oPeppi §7»§f§o Du bist nicht mit dem Server verbunden!");
                 socket.connectSocket();
             }
         }
@@ -100,7 +108,7 @@ public class SocketConnection extends WebSocketClient {
             return;
         }
         PlayerUtilities pUtils = new PlayerUtilities();
-        pUtils.displayNormal("§c§l[N-FUNK] §a§oPeppi §7»§f§o Ich verbinde dich mit dem Server...");
+        pUtils.displayNormal("§c§l[N-CHAT] §a§oPeppi §7»§f§o Ich verbinde dich mit dem Server...");
         socket.connect();
     }
 
