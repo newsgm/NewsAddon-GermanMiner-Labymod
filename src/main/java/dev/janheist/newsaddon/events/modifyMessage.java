@@ -5,7 +5,6 @@ import dev.janheist.newsaddon.main.NewsAddon;
 import dev.janheist.newsaddon.modules.WerbeCounter120;
 import dev.janheist.newsaddon.modules.WerbeCounter90;
 import net.labymod.api.events.MessageModifyChatEvent;
-import net.minecraft.command.ICommandSender;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextComponentString;
@@ -80,24 +79,18 @@ public class modifyMessage implements MessageModifyChatEvent {
     }
 
     private boolean validate(String msg) {
-        if(msg.contains("Werbetext: ") && (
-            msg.contains("Polizist") ||
-            msg.contains("Zivilist") ||
-            msg.contains("Journalist") ||
-            msg.contains("Notarzt") ||
-            msg.contains("Bandito") ||
-            msg.contains("Sureno") ||
-            msg.contains("Supporter") ||
-            msg.contains("Moderator") ||
-            msg.contains("Admin") ||
-            msg.contains("Serverleit") ||
-            msg.contains("Entwickler") ||
-            msg.contains("Bauteam")))
-        {
-            return false;
-        } else {
-            return true;
-        }
+        return !msg.contains("Werbetext: ") || (!msg.contains("Polizist") &&
+                !msg.contains("Zivilist") &&
+                !msg.contains("Journalist") &&
+                !msg.contains("Notarzt") &&
+                !msg.contains("Bandito") &&
+                !msg.contains("Sureno") &&
+                !msg.contains("Supporter") &&
+                !msg.contains("Moderator") &&
+                !msg.contains("Admin") &&
+                !msg.contains("Serverleit") &&
+                !msg.contains("Entwickler") &&
+                !msg.contains("Bauteam"));
     }
 
 }

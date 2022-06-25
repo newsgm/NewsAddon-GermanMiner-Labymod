@@ -15,7 +15,7 @@ import java.util.TimerTask;
 public class DauerauftragTimer extends TimerTask {
     NewsAddon newsAddon;
     Dauerauftrag dauerauftrag;
-    private int version;
+    private final int version;
 
     public DauerauftragTimer(NewsAddon newsAddon, Dauerauftrag dauerauftrag, int version) {
         this.newsAddon = newsAddon;
