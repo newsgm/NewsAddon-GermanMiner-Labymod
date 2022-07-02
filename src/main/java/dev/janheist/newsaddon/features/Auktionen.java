@@ -21,6 +21,7 @@ public class Auktionen {
     private final List<String> bizTexte = new ArrayList<>();
     private final List<String> autoTexte = new ArrayList<>();
     private final List<String> codeTexte = new ArrayList<>();
+    private final List<String> mieTexte = new ArrayList<>();
 
     public Auktionen() {
         LocalDateTime localDateTime = LocalDateTime.now().plusDays(7);
@@ -35,16 +36,29 @@ public class Auktionen {
         itemTexte.add("Als letztes bräuchte ich bitte einmal deine Kontonummer und das Item mit den 500€ Auktionsgebühr über das Handelsmenü.");
 
         gsTexte.add("Bist du dir bewusst, dass die Auktion anfangs 500€ kostet? Weiterhin fallen 3% vom Gewinn Auktionsgebühr an, sofern die Region versteigert wird.");
-        gsTexte.add("Bei einer Grundstücksauktion wird die Auktion im Forum erst veröffentlicht, nachdem du das Grundstück an unsere Fraktionsleitung übertragen hast.");
-        gsTexte.add("In welchem Stadtteil befindet sich die Region und wie ist die ID (mie-/kau-ID)?");
+        gsTexte.add("Bei einer Grundstücksauktion wird die Auktion im Forum erst veröffentlicht, nachdem das Grundstück an unsere Fraktionsleitung übertragen wurde.");
+        gsTexte.add("In welchem Stadtteil befindet sich die Region und wie ist die ID (kau-ID)?");
         gsTexte.add("Wie ist der Grundpreis (Staat) und wie hoch sind die Grundsteuern?");
         gsTexte.add("Kennst du die Maße der Region?");
         gsTexte.add("An welchem Tag und zu welcher Uhrzeit soll die Auktion enden? (Maximal bis zum " + latestEnd + ")");
         gsTexte.add("Wie soll der Startpreis in der Auktion sein?");
         gsTexte.add("Welche Summe soll für den Sofortkauf bestimmt werden?");
         gsTexte.add("In welchen Schritten sollen die Spieler mindestens bieten?");
+        gsTexte.add("Hast du Fotos von dem Grundstück oder soll ich welche machen?");
         gsTexte.add("Dann bekomme ich bitte noch deine Kontonummer und die 500€ Auktionsgebühr.");
         gsTexte.add("Zuletzt müsstest du bitte noch einen Vertrag unterzeichnen (/vertrag).");
+
+        mieTexte.add("Bist du dir bewusst, dass die Auktion anfangs 500€ kostet? Weiterhin fallen 3% vom Gewinn Auktionsgebühr an, sofern die Region versteigert wird.");
+        mieTexte.add("In welchem Stadtteil befindet sich die Mietregion und wie ist die ID (mie-ID)?");
+        mieTexte.add("Wie hoch sind die Mietkosten am Tag?");
+        mieTexte.add("Kennst du die Maße der Region?");
+        mieTexte.add("An welchem Tag und zu welcher Uhrzeit soll die Auktion enden? (Maximal bis zum " + latestEnd + ")");
+        mieTexte.add("Wie soll der Startpreis in der Auktion sein?");
+        mieTexte.add("Welche Summe soll für den Sofortkauf bestimmt werden?");
+        mieTexte.add("In welchen Schritten sollen die Spieler mindestens bieten?");
+        mieTexte.add("Hast du Fotos oder soll ich welche machen?");
+        mieTexte.add("Dann bekomme ich bitte noch deine Kontonummer und die 500€ Auktionsgebühr.");
+        mieTexte.add("Zuletzt müsstest du bitte noch einen Vertrag unterzeichnen (/vertrag).");
 
         bizTexte.add("Bist du dir bewusst, dass die Auktion anfangs 500€ kostet? Weiterhin fallen 3% vom Gewinn Auktionsgebühr an, sofern das BIZ versteigert wird.");
         bizTexte.add("Welche Art von BIZ möchtest du versteigern und in welcher Region befindet es sich?");
@@ -53,6 +67,7 @@ public class Auktionen {
         bizTexte.add("Wie soll der Startpreis in der Auktion sein?");
         bizTexte.add("Welche Summe soll für den Sofortkauf bestimmt werden?");
         bizTexte.add("In welchen Schritten sollen die Spieler mindestens bieten?");
+        bizTexte.add("Hast du Fotos vom BIZ oder soll ich welche machen?");
         bizTexte.add("Dann bekomme ich bitte noch deine Kontonummer und die 500€ Auktionsgebühr.");
         bizTexte.add("Zuletzt müsstest du bitte noch einen Vertrag unterzeichnen (/vertrag).");
 
@@ -94,11 +109,14 @@ public class Auktionen {
             case "gs":
             case "grundstück":
             case "grundstueck":
+                doAuction(gsTexte);
+                pUtils.displayPrefix("§aDie Person muss noch einen Vertrag unterschreiben.");
+                break;
+            case "mie":
             case "mietregion":
             case "mietzone":
-            case "mie":
             case "werbetafel":
-                doAuction(gsTexte);
+                doAuction(mieTexte);
                 pUtils.displayPrefix("§aDie Person muss noch einen Vertrag unterschreiben.");
                 break;
             case "vehicle":
