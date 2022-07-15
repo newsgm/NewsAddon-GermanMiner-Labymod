@@ -127,7 +127,6 @@ public abstract class AbstractWebSocket extends WebSocketAdapter {
             }
           }
         } catch (Exception e) {
-          System.out.println("Error resetting pings");
         }
         restartConnectionLostTimer();
       }

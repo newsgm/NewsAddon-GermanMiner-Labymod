@@ -216,8 +216,6 @@ public class WebSocketImpl implements WebSocket {
    */
   public void decode(ByteBuffer socketBuffer) {
     assert (socketBuffer.hasRemaining());
-    System.out.println("JAN-UNBEKANNTER FEHLER LINE 219 - BITTE MELDEN");
-
 
     if (readyState != ReadyState.NOT_YET_CONNECTED) {
       if (readyState == ReadyState.OPEN) {
@@ -287,7 +285,6 @@ public class WebSocketImpl implements WebSocket {
                     closeConnectionDueToWrongHandshake(e);
                     return false;
                   } catch (RuntimeException e) {
-                    System.out.println("[NEWS-DEBUG] Interner Serverfehler, Verbindung getrennt");
 
                     wsl.onWebsocketError(this, e);
                     closeConnectionDueToInternalServerError(e);
@@ -347,7 +344,6 @@ public class WebSocketImpl implements WebSocket {
               flushAndClose(e.getCloseCode(), e.getMessage(), false);
               return false;
             } catch (RuntimeException e) {
-              System.out.println("[NEWS-DEBUG] Interner Clientfehler, Verbindung getrennt");
               wsl.onWebsocketError(this, e);
               flushAndClose(CloseFrame.NEVER_CONNECTED, e.getMessage(), false);
               return false;
@@ -394,19 +390,15 @@ public class WebSocketImpl implements WebSocket {
       }
     } catch (LimitExceededException e) {
       if (e.getLimit() == Integer.MAX_VALUE) {
-        System.out.println("[NEWS-DEBUG] Invalid size of frame, Verbindung getrennt");
         wsl.onWebsocketError(this, e);
       }
       close(e);
     } catch (InvalidDataException e) {
-        System.out.println("[NEWS-DEBUG] Invalid data, Verbindung getrennt");
       wsl.onWebsocketError(this, e);
       close(e);
     } catch (VirtualMachineError | ThreadDeath | LinkageError e) {
-        System.out.println("[NEWS-DEBUG] Interner Clientfehler, Verbindung getrennt");
       throw e;
     } catch (Error e) {
-      System.out.println("[NEWS-DEBUG] Interner Clientfehler, Verbindung getrennt");
       Exception exception = new Exception(e);
       wsl.onWebsocketError(this, exception);
       String errorMessage = "Got error " + e.getClass().getName();
@@ -482,7 +474,6 @@ public class WebSocketImpl implements WebSocket {
               sendFrame(closeFrame);
             }
           } catch (InvalidDataException e) {
-            System.out.println("[NEWS-DEBUG] Invalid data, Verbindung getrennt");
             wsl.onWebsocketError(this, e);
             flushAndClose(CloseFrame.ABNORMAL_CLOSE, "generated frame is invalid", false);
           }
@@ -544,7 +535,6 @@ public class WebSocketImpl implements WebSocket {
         if (e.getMessage() != null && e.getMessage().equals("Broken pipe")) {
           
         } else {
-          System.out.println("[NEWS-DEBUG] Interner Clientfehler, Verbindung getrennt");
           wsl.onWebsocketError(this, e);
         }
       }
@@ -592,7 +582,6 @@ public class WebSocketImpl implements WebSocket {
     try {
       wsl.onWebsocketClosing(this, code, message, remote);
     } catch (RuntimeException e) {
-      System.out.println("[NEWS-DEBUG] Interner Clientfehler, Verbindung getrennt 595");
       wsl.onWebsocketError(this, e);
     }
     if (draft != null) {
@@ -720,7 +709,6 @@ public class WebSocketImpl implements WebSocket {
       // Stop if the client code throws an exception
       throw new InvalidHandshakeException("Handshake data rejected by client.");
     } catch (RuntimeException e) {
-      System.out.println("[NEWS-DEBUG] Interner Clientfehler, Verbindung getrennt 723");
       wsl.onWebsocketError(this, e);
       throw new InvalidHandshakeException("rejected because of " + e);
     }
@@ -730,8 +718,6 @@ public class WebSocketImpl implements WebSocket {
   }
 
   private void write(ByteBuffer buf) {
-    System.out.println("JAN-UNBEKANNTER FEHLER LINE 743 - BITTE MELDEN");
-
     outQueue.add(buf);
     wsl.onWriteDemand(this);
   }

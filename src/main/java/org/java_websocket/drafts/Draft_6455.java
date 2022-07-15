@@ -886,7 +886,6 @@ public class Draft_6455 extends Draft {
     } else if (!frame.isFin() || curop == Opcode.CONTINUOUS) {
       processFrameContinuousAndNonFin(webSocketImpl, frame, curop);
     } else if (currentContinuousFrame != null) {
-      System.out.println("Received a non-continuous frame after a continuous frame");
       throw new InvalidDataException(CloseFrame.PROTOCOL_ERROR,
           "Continuous frame sequence not completed.");
     } else if (curop == Opcode.TEXT) {
@@ -894,7 +893,6 @@ public class Draft_6455 extends Draft {
     } else if (curop == Opcode.BINARY) {
       processFrameBinary(webSocketImpl, frame);
     } else {
-      System.out.println("Received an unknown opcode " + curop);
       throw new InvalidDataException(CloseFrame.PROTOCOL_ERROR,
           "non control or continious frame expected");
     }
@@ -915,13 +913,11 @@ public class Draft_6455 extends Draft {
     } else if (frame.isFin()) {
       processFrameIsFin(webSocketImpl, frame);
     } else if (currentContinuousFrame == null) {
-      System.out.println("Received a continuous frame without a previous frame");
       throw new InvalidDataException(CloseFrame.PROTOCOL_ERROR,
           "Continuous frame sequence was not started.");
     }
     //Check if the whole payload is valid utf8, when the opcode indicates a text
     if (curop == Opcode.TEXT && !Charsetfunctions.isValidUTF8(frame.getPayloadData())) {
-      System.out.println("Received a continuous frame with invalid utf8");
       throw new InvalidDataException(CloseFrame.NO_UTF8);
     }
     //Checking if the current continuous frame contains a correct payload with the other frames combined
@@ -952,7 +948,6 @@ public class Draft_6455 extends Draft {
    * @param e             the runtime exception
    */
   private void logRuntimeException(WebSocketImpl webSocketImpl, RuntimeException e) {
-    System.out.println("RuntimeException in onWebsocketMessage");
     webSocketImpl.getWebSocketListener().onWebsocketError(webSocketImpl, e);
   }
 

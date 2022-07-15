@@ -140,7 +140,6 @@ public class SSLSocketChannel implements WrappedByteChannel, ByteChannel, ISSLCh
       try {
         socketChannel.close();
       } catch (IOException e) {
-        System.out.println("Error closing socket channel");
       }
     }
   }
@@ -168,7 +167,6 @@ public class SSLSocketChannel implements WrappedByteChannel, ByteChannel, ISSLCh
         try {
           result = engine.unwrap(peerNetData, peerAppData);
         } catch (SSLException e) {
-          System.out.println("Exception during the unwrap of the data");
           throw e;
         }
         switch (result.getStatus()) {
@@ -482,7 +480,6 @@ public class SSLSocketChannel implements WrappedByteChannel, ByteChannel, ISSLCh
     try {
       engine.closeInbound();
     } catch (Exception e) {
-      System.out.println("Exception while closing inbound");
     }
     closeConnection();
   }
