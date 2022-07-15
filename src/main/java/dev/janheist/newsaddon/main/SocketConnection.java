@@ -57,8 +57,10 @@ public class SocketConnection extends WebSocketClient {
             if(from.equalsIgnoreCase(LabyMod.getInstance().getPlayerName()))
                 from = "mir";
 
-            pUtils.displayNormal("§c§l[PM] §a" + from + " §7> §c" + to + " §7»§f " + message);
+            pUtils.displayNormal("§c§l[N-PM] §a" + from + " §7> §c" + to + " §7»§f " + message);
 
+        } else if (s.startsWith("versionCheck")) {
+            this.s("myVersion §TOKEN§ " + NewsAddon.VERSION);
         } else {
             System.out.println("[NEWS-WS] Unknown msg: " + s);
         }

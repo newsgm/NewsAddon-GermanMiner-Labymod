@@ -20,7 +20,7 @@ public class nfCommand {
                 newsAddon.getSocketConnection().s("plsKillMe");
             } else if (args[1].equals("veryUnusualStringThatAPlayerWouldSendToTheServer")) {
                 pUtils.displayPrefix("");
-                pUtils.displayPrefix("§aAktuelle Version: " + newsAddon.VERSION);
+                pUtils.displayPrefix("§aAktuelle Version: " + NewsAddon.VERSION);
                 pUtils.displayPrefix("§e/nf §e[connect, connected, close, <msg>]");
                 pUtils.displayPrefix("");
             } else if (args[1].equals("connected")) {

@@ -69,11 +69,11 @@ public class onSend implements MessageSendEvent {
                 ex.printStackTrace();
             }
             return true;
-        } else if (s.startsWith("/newspm")) {
-            newspm.init(orig);
-            return true;
         } else if (s.startsWith("/newspmr")) {
             newspm.init(orig.replace("/newspmr ", ("/newspm " + NewsAddon.lastContact + " ")));
+            return true;
+        } else if (s.startsWith("/newspm")) {
+            newspm.init(orig);
             return true;
         }
 

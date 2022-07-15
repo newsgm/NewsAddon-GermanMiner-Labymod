@@ -16,7 +16,7 @@ public class newspmCommand {
             String[] args = message.split(" ");
 
             if(args.length < 3) {
-                pUtils.displayNormal("§c§l[PM] §cKorrekte Nutzung: /newspm <Spieler> <Nachricht>");
+                pUtils.displayNormal("§c§l[N-PM] §cKorrekte Nutzung: /newspm <Spieler> <Nachricht>");
                 return;
             }
 
