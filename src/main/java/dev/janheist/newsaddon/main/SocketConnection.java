@@ -50,12 +50,12 @@ public class SocketConnection extends WebSocketClient {
             String to = s.split(" ")[2];
             String message = s.replace("pm " + from + " " + to + " ", "");
 
+            NewsAddon.lastContact = (from.equalsIgnoreCase(LabyMod.getInstance().getPlayerName()) ? to : from);
+
             if (to.equalsIgnoreCase(LabyMod.getInstance().getPlayerName()))
                 to = "mir";
             if(from.equalsIgnoreCase(LabyMod.getInstance().getPlayerName()))
                 from = "mir";
-
-            NewsAddon.lastContact = (from.equalsIgnoreCase(LabyMod.getInstance().getPlayerName()) ? to : from);
 
             pUtils.displayNormal("§c§l[PM] §a" + from + " §7> §c" + to + " §7»§f " + message);
 
