@@ -8,6 +8,7 @@ import dev.janheist.newsaddon.features.PlayerUtilities;
 import dev.janheist.newsaddon.modules.UpdateChecker;
 import dev.janheist.newsaddon.modules.WerbeCounter120;
 import dev.janheist.newsaddon.modules.WerbeCounter90;
+import dev.janheist.newsaddon.timer.SpeedWarning;
 import dev.janheist.newsaddon.timer.WerbeTimer;
 import net.labymod.api.EventManager;
 import net.labymod.api.LabyModAddon;
@@ -53,6 +54,7 @@ public class NewsAddon extends LabyModAddon {
     public String soundDAausw;
     public boolean playermenu;
     public boolean autoconnectgm;
+    public boolean speedcam;
     public String daurl;
     private boolean gotDA = false;
     public String last_scanned_name;
@@ -111,7 +113,9 @@ public class NewsAddon extends LabyModAddon {
 
 
         Timer timer = new Timer();
+        Timer timer2 = new Timer();
         timer.schedule(new WerbeTimer(this), 0, 1000);
+        timer2.schedule(new SpeedWarning(this), 0, 1000);
 
     }
 
@@ -127,6 +131,7 @@ public class NewsAddon extends LabyModAddon {
         this.autoconnectgm = !getConfig().has("autoconnectgm") || getConfig().get("autoconnectgm").getAsBoolean();
 
         this.daurl = getConfig().has("daurl") ? getConfig().get("daurl").getAsString() : "http";
+        this.speedcam = getConfig().has("speedcam") && getConfig().get("speedcam").getAsBoolean();
     }
 
     @Override
@@ -149,7 +154,9 @@ public class NewsAddon extends LabyModAddon {
         getSubSettings().add(new BooleanElement("An = Aktiv", this, new ControlElement.IconData(Material.SKULL_ITEM), "playermenu", this.playermenu));
         getSubSettings().add(new HeaderElement(""));
         getSubSettings().add(new HeaderElement("§a§lWebSocket"));
-        getSubSettings().add(new BooleanElement("An = AutoConnect GM", this, new ControlElement.IconData(Material.REDSTONE_LAMP_ON), "autoconnectgm", this.autoconnectgm));
+        getSubSettings().add(new HeaderElement(""));
+        getSubSettings().add(new HeaderElement("SpeedCam §o(Nutzung auf eigene Gefahr!)"));
+        getSubSettings().add(new BooleanElement("An = Actionbar", this, new ControlElement.IconData(Material.PAPER), "speedcam", this.speedcam));
     }
 
     public void resetSeconds() {
