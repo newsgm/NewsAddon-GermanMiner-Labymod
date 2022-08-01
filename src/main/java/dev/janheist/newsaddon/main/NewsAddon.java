@@ -154,6 +154,7 @@ public class NewsAddon extends LabyModAddon {
         getSubSettings().add(new BooleanElement("An = Aktiv", this, new ControlElement.IconData(Material.SKULL_ITEM), "playermenu", this.playermenu));
         getSubSettings().add(new HeaderElement(""));
         getSubSettings().add(new HeaderElement("§a§lWebSocket"));
+        getSubSettings().add(new BooleanElement("An = AutoConnect GM", this, new ControlElement.IconData(Material.REDSTONE_LAMP_ON), "autoconnectgm", this.autoconnectgm));
         getSubSettings().add(new HeaderElement(""));
         getSubSettings().add(new HeaderElement("SpeedCam §o(Nutzung auf eigene Gefahr!)"));
         getSubSettings().add(new BooleanElement("An = Actionbar", this, new ControlElement.IconData(Material.PAPER), "speedcam", this.speedcam));
