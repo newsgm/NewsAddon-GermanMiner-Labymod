@@ -53,6 +53,7 @@ public class NewsAddon extends LabyModAddon {
     public String soundDAausw;
     public boolean playermenu;
     public boolean autoconnectgm;
+    public boolean isazubi;
     public String daurl;
     private boolean gotDA = false;
     public String last_scanned_name;
@@ -125,8 +126,8 @@ public class NewsAddon extends LabyModAddon {
         this.soundDAausw = getConfig().has("soundDAausw") ? getConfig().get("soundDAausw").getAsString() : "sirene_2";
         this.playermenu = !getConfig().has("playermenu") || getConfig().get("playermenu").getAsBoolean();
         this.autoconnectgm = !getConfig().has("autoconnectgm") || getConfig().get("autoconnectgm").getAsBoolean();
-
         this.daurl = getConfig().has("daurl") ? getConfig().get("daurl").getAsString() : "http";
+        this.isazubi = getConfig().has("isazubi") && getConfig().get("isazubi").getAsBoolean();
     }
 
     @Override
@@ -143,10 +144,13 @@ public class NewsAddon extends LabyModAddon {
         getSubSettings().add(new BooleanElement("Nach 120 Werbetimer", this, new ControlElement.IconData(Material.WATCH), "sound120", this.sound120));
         getSubSettings().add(new StringElement("Sound bei 120 Sekunden", this, new ControlElement.IconData(Material.MOB_SPAWNER), "sound120ausw", this.sound120ausw));
         getSubSettings().add(new BooleanElement("Bei Dauerauftrag", this, new ControlElement.IconData(Material.PAPER), "soundDA", this.soundDA));
-        getSubSettings().add( new StringElement( "Sound wenn ein DA ansteht", this, new ControlElement.IconData( Material.MOB_SPAWNER ), "soundDAausw", this.soundDAausw ) );
+        getSubSettings().add(new StringElement( "Sound wenn ein DA ansteht", this, new ControlElement.IconData( Material.MOB_SPAWNER ), "soundDAausw", this.soundDAausw ) );
         getSubSettings().add(new HeaderElement(""));
         getSubSettings().add(new HeaderElement("§a§lSpielermenü"));
         getSubSettings().add(new BooleanElement("An = Aktiv", this, new ControlElement.IconData(Material.SKULL_ITEM), "playermenu", this.playermenu));
+        getSubSettings().add(new HeaderElement(""));
+        getSubSettings().add(new HeaderElement("§a§lRangauswahl"));
+        getSubSettings().add(new BooleanElement("Azubi", this, new ControlElement.IconData(Material.NAME_TAG), "isazubi", this.isazubi));
         getSubSettings().add(new HeaderElement(""));
         getSubSettings().add(new HeaderElement("§a§lWebSocket"));
         getSubSettings().add(new BooleanElement("An = AutoConnect GM", this, new ControlElement.IconData(Material.REDSTONE_LAMP_ON), "autoconnectgm", this.autoconnectgm));

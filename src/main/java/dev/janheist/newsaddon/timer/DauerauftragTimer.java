@@ -26,7 +26,7 @@ public class DauerauftragTimer extends TimerTask {
     @Override
     public void run() {
         try {
-            if (version == dauerauftrag.current_version &&
+            if (version == dauerauftrag.current_version && newsAddon.isazubi ==false &&
                     (newsAddon.DEBUGMODE || LabyMod.getInstance().getCurrentServerData().getIp().toLowerCase().contains("germanminer"))) {
                 PlayerUtilities pUtils = new PlayerUtilities();
                 pUtils.displayPrefix("§a§lEventuell muss ein Dauerauftrag geschaltet werden!");
