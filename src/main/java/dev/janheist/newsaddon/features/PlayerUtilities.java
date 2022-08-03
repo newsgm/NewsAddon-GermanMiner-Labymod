@@ -25,8 +25,9 @@ public class PlayerUtilities {
     public void displayNormal(String message) {
         LabyMod.getInstance().displayMessageInChat(message);
     }
-    public void displayPrefix(String message) {
+    public boolean displayPrefix(String message) {
         LabyMod.getInstance().displayMessageInChat(PREFIX.concat(message));
+        return true;
     }
 
     public void clickableCommand(String message, String command, boolean prefix) {
