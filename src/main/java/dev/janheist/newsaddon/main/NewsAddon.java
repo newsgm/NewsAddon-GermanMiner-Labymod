@@ -53,8 +53,7 @@ public class NewsAddon extends LabyModAddon {
     public String soundDAausw;
     public boolean playermenu;
     public boolean autoconnectgm;
-    public boolean israng1;
-    public boolean israng5;
+    public boolean isazubi;
     public String daurl;
     private boolean gotDA = false;
     public String last_scanned_name;
@@ -128,9 +127,7 @@ public class NewsAddon extends LabyModAddon {
         this.playermenu = !getConfig().has("playermenu") || getConfig().get("playermenu").getAsBoolean();
         this.autoconnectgm = !getConfig().has("autoconnectgm") || getConfig().get("autoconnectgm").getAsBoolean();
         this.daurl = getConfig().has("daurl") ? getConfig().get("daurl").getAsString() : "http";
-        this.israng1 = getConfig().has("israng1") && getConfig().get("israng1").getAsBoolean();
-        this.israng5 = getConfig().has("israng5") && getConfig().get("israng5").getAsBoolean();
-
+        this.isazubi = getConfig().has("isazubi") && getConfig().get("isazubi").getAsBoolean();
     }
 
     @Override
@@ -153,8 +150,7 @@ public class NewsAddon extends LabyModAddon {
         getSubSettings().add(new BooleanElement("An = Aktiv", this, new ControlElement.IconData(Material.SKULL_ITEM), "playermenu", this.playermenu));
         getSubSettings().add(new HeaderElement(""));
         getSubSettings().add(new HeaderElement("§a§lRangauswahl"));
-        getSubSettings().add(new BooleanElement("Azubi", this, new ControlElement.IconData(Material.NAME_TAG), "israng1", this.israng1));
-        getSubSettings().add(new BooleanElement("Chefredakteur", this, new ControlElement.IconData(Material.NAME_TAG), "israng5", this.israng5));
+        getSubSettings().add(new BooleanElement("Azubi", this, new ControlElement.IconData(Material.NAME_TAG), "isazubi", this.isazubi));
         getSubSettings().add(new HeaderElement(""));
         getSubSettings().add(new HeaderElement("§a§lWebSocket"));
         getSubSettings().add(new BooleanElement("An = AutoConnect GM", this, new ControlElement.IconData(Material.REDSTONE_LAMP_ON), "autoconnectgm", this.autoconnectgm));

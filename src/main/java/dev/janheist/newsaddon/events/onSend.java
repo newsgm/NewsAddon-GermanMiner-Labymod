@@ -3,12 +3,10 @@ package dev.janheist.newsaddon.events;
 import dev.janheist.newsaddon.commands.newspmCommand;
 import dev.janheist.newsaddon.features.Auktionen;
 import dev.janheist.newsaddon.features.NewsAddonCommand;
-import dev.janheist.newsaddon.features.PlayerUtilities;
 import dev.janheist.newsaddon.features.Show;
 import dev.janheist.newsaddon.commands.nfCommand;
 import dev.janheist.newsaddon.main.NewsAddon;
 import net.labymod.api.events.MessageSendEvent;
-import net.labymod.main.LabyMod;
 
 import java.util.Arrays;
 
@@ -20,7 +18,6 @@ public class onSend implements MessageSendEvent {
     NewsAddonCommand addonCommand;
     nfCommand nfcmd;
     newspmCommand newspm;
-    PlayerUtilities pUtils = new PlayerUtilities();
 
     public onSend(NewsAddon newsAddon) {
         this.newsAddon = newsAddon;
@@ -38,15 +35,11 @@ public class onSend implements MessageSendEvent {
         if (args.length > 1)
             args[0] = args[0].toLowerCase();
 
-        if (newsAddon.israng1 == false) {
-            if (newsAddon.israng5) {
-                if (s.startsWith("/auction get-ticket") || s.startsWith("/auktion get-ticket") ||
-                        s.startsWith("/auction help") || s.startsWith("/auktion help")) {
-                    return false;
-                }
-            } else return pUtils.displayPrefix("Das ist noch nicht relevant :)");
-
-            if (args.length >= 2 && (args[0].startsWith("/auction") || args[0].startsWith("/auktion"))) {
+        if (newsAddon.isazubi == false) {
+            if (s.startsWith("/auction get-ticket") || s.startsWith("/auktion get-ticket") ||
+                    s.startsWith("/auction help") || s.startsWith("/auktion help")) {
+                return false;
+            } else if (args.length >= 2 && (args[0].startsWith("/auction") || args[0].startsWith("/auktion"))) {
                 auctions.startAuction(Arrays.copyOfRange(args, 1, args.length));
                 return true;
             } else if (s.startsWith("/newsaddon show ")) {
@@ -60,11 +53,7 @@ public class onSend implements MessageSendEvent {
                 addonCommand.init(s);
                 return true;
             }
-        } else {
-            return pUtils.displayPrefix("Das ist noch nicht relevant :)");
-        }
-
-        if (s.startsWith("/nf") || s.startsWith("--")) {
+        } else if (s.startsWith("/nf") || s.startsWith("--")) {
             try {
                 if (orig.startsWith("-- ")) {
                     orig = orig.substring(3);
@@ -89,6 +78,7 @@ public class onSend implements MessageSendEvent {
             newspm.init(orig);
             return true;
         }
+
         return false;
     }
 }
