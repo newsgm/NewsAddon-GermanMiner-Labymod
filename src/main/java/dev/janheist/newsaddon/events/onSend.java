@@ -35,11 +35,15 @@ public class onSend implements MessageSendEvent {
         if (args.length > 1)
             args[0] = args[0].toLowerCase();
 
-        if (newsAddon.isazubi == false) {
-            if (s.startsWith("/auction get-ticket") || s.startsWith("/auktion get-ticket") ||
-                    s.startsWith("/auction help") || s.startsWith("/auktion help")) {
-                return false;
-            } else if (args.length >= 2 && (args[0].startsWith("/auction") || args[0].startsWith("/auktion"))) {
+        if (newsAddon.israng1 == false) {
+            if (newsAddon.israng5) {
+                if (s.startsWith("/auction get-ticket") || s.startsWith("/auktion get-ticket") ||
+                        s.startsWith("/auction help") || s.startsWith("/auktion help")) {
+                    return false;
+                }
+            } else return true;
+
+            if (args.length >= 2 && (args[0].startsWith("/auction") || args[0].startsWith("/auktion"))) {
                 auctions.startAuction(Arrays.copyOfRange(args, 1, args.length));
                 return true;
             } else if (s.startsWith("/newsaddon show ")) {
@@ -53,7 +57,11 @@ public class onSend implements MessageSendEvent {
                 addonCommand.init(s);
                 return true;
             }
-        } else if (s.startsWith("/nf") || s.startsWith("--")) {
+        } else {
+            return true;
+        }
+
+        if (s.startsWith("/nf") || s.startsWith("--")) {
             try {
                 if (orig.startsWith("-- ")) {
                     orig = orig.substring(3);
