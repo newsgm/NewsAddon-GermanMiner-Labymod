@@ -7,13 +7,15 @@ import net.minecraft.client.Minecraft;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.io.*;
-import java.net.HttpURLConnection;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.net.URLConnection;
-import java.nio.file.*;
-import java.nio.file.attribute.FileAttribute;
-import java.util.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
+import java.util.Arrays;
+import java.util.TimeZone;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class UpdateChecker {
     static NewsAddon newsAddon;
@@ -43,13 +45,13 @@ public class UpdateChecker {
                 while (!success) {
                     try {
                         success = file.delete();
-                    } catch (SecurityException securityException) {}
+                    } catch (SecurityException ignored) {}
                 }
             }
         }
 
         try {
-            Files.copy(currentFile.toPath(), (new File(addonFolder, currentFile.getName())).toPath(), new CopyOption[] { StandardCopyOption.REPLACE_EXISTING });
+            Files.copy(currentFile.toPath(), (new File(addonFolder, currentFile.getName())).toPath(), StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -70,7 +72,6 @@ public class UpdateChecker {
     private static void check(int VERSION) throws IOException {
 
         TimeZone.getTimeZone("Europe/Berlin");
-        Date now = new Date();
 
         URL url = new URL("https://intern.news-redaktion.de/version.json");
 
@@ -80,7 +81,7 @@ public class UpdateChecker {
         InputStream is =con.getInputStream();
         BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
-        String line = null;
+        String line;
         String emptyLink = br.readLine();
         String newDownloadLink = br.readLine();
         int newVersion = Integer.parseInt(br.readLine());
@@ -105,7 +106,7 @@ public class UpdateChecker {
         try {
             Path tempDir;
             try {
-                tempDir = Files.createTempDirectory("NewsAddon-", (FileAttribute<?>[]) new FileAttribute[0]);
+                tempDir = Files.createTempDirectory("NewsAddon-");
             } catch (IOException e) {
                 e.printStackTrace();
                 return;
@@ -114,7 +115,7 @@ public class UpdateChecker {
             urlConnection.setSSLSocketFactory(PlayerUtilities.getSocketFactory());
 
             updatedAddon = new File(tempDir.toFile(), "NewsAddon-" + newVersion + ".jar");
-            Files.copy(urlConnection.getInputStream(), updatedAddon.toPath(), new CopyOption[]{StandardCopyOption.REPLACE_EXISTING});
+            Files.copy(urlConnection.getInputStream(), updatedAddon.toPath(), StandardCopyOption.REPLACE_EXISTING);
 
             Runtime.getRuntime().addShutdownHook(new Thread(() -> {
                 try {
@@ -122,7 +123,7 @@ public class UpdateChecker {
                         String yourShellInput = "\"" + minecraftDirectory + "\"";  // or whatever ...
                         String[] commandAndArgs = new String[]{"java", "-cp", "\"" + updatedAddon.getAbsolutePath() + "\"", "dev.janheist.newsaddon.modules.UpdateChecker", yourShellInput};
                         Runtime.getRuntime().exec(commandAndArgs);
-                        System.out.println("[NEWS-DEBUG] Windows-User: " + commandAndArgs);
+                        System.out.println("[NEWS-DEBUG] Windows-User: " + Arrays.toString(commandAndArgs));
                     } else {
                         Runtime.getRuntime().exec("sh -c 'java -cp \"" + updatedAddon.getAbsolutePath() + "\" dev.janheist.newsaddon.modules.UpdateChecker \"" + minecraftDirectory + "\"'");
                         ProcessBuilder processBuilder = new ProcessBuilder();
