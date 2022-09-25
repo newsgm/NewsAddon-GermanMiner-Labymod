@@ -31,7 +31,7 @@ public class NewsAddon extends LabyModAddon {
     public static String ws = "ws://news-redaktion.de:8181";
 
     // Vor Release auf false setzen!
-    public final boolean DEBUGMODE = false;
+    public final boolean DEBUGMODE = true;
 
     public EventManager eventManager;
     public int seconds120 = 0;

@@ -35,18 +35,17 @@ public class onSend implements MessageSendEvent {
         if (args.length > 1)
             args[0] = args[0].toLowerCase();
 
-        if (newsAddon.israng1 == false) {
-            if (newsAddon.israng5) {
-                if (s.startsWith("/auction get-ticket") || s.startsWith("/auktion get-ticket") ||
-                        s.startsWith("/auction help") || s.startsWith("/auktion help")) {
-                    return false;
-                }
-            } else return true;
-
+        if (newsAddon.isazubi == true) {
+            if (s.startsWith("/auction get-ticket") || s.startsWith("/auktion get-ticket") ||
+                    s.startsWith("/auction help") || s.startsWith("/auktion help")) {
+                return true;
+            }
             if (args.length >= 2 && (args[0].startsWith("/auction") || args[0].startsWith("/auktion"))) {
                 auctions.startAuction(Arrays.copyOfRange(args, 1, args.length));
                 return true;
-            } else if (s.startsWith("/newsaddon show ")) {
+            }
+        } else if (newsAddon.isazubi == false) {
+            if (s.startsWith("/newsaddon show ")) {
                 sendInChat.init(orig.substring(16));
                 return true;
             } else if (args.length >= 3 && s.startsWith("/newsaddon auktion ") || s.startsWith("/newsaddon auction ")) {
@@ -57,9 +56,8 @@ public class onSend implements MessageSendEvent {
                 addonCommand.init(s);
                 return true;
             }
-        } else {
-            return true;
-        }
+        } else return false;
+
 
         if (s.startsWith("/nf") || s.startsWith("--")) {
             try {
