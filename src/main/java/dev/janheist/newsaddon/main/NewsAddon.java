@@ -27,11 +27,11 @@ import java.util.Timer;
 
 public class NewsAddon extends LabyModAddon {
 
-    public static final int VERSION = 13;
+    public static final int VERSION = 14;
     public static String ws = "ws://news-redaktion.de:8181";
 
     // Vor Release auf false setzen!
-    public final boolean DEBUGMODE = true;
+    public final boolean DEBUGMODE = false;
 
     public EventManager eventManager;
     public int seconds120 = 0;

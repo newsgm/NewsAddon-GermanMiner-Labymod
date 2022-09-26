@@ -162,15 +162,6 @@
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
-  <component name="ProjectRunConfigurationManager">
-    <configuration default="false" name="Deploy" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="dev.janheist.newsaddon.modules.AutoDeploy" />
-      <module name="Addon" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-  </component>
   <component name="SvnBranchConfigurationManager">
     <option name="mySupportsUserInfoFilter" value="true" />
   </component>
