@@ -3,20 +3,13 @@ package dev.janheist.newsaddon.features;
 import dev.janheist.newsaddon.main.NewsAddon;
 import dev.janheist.newsaddon.timer.DauerauftragTimer;
 
-import javax.net.ssl.*;
-import java.io.*;
+import javax.net.ssl.HttpsURLConnection;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.security.KeyManagementException;
-import java.security.KeyStore;
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
-import java.security.cert.Certificate;
-import java.security.cert.CertificateFactory;
-import java.security.cert.X509Certificate;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -25,8 +18,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.TimeZone;
 import java.util.Timer;
-
-import javax.net.ssl.HttpsURLConnection;
 
 
 public class Dauerauftrag {

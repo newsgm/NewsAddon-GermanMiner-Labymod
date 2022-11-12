@@ -9,6 +9,7 @@ import dev.janheist.newsaddon.modules.UpdateChecker;
 import dev.janheist.newsaddon.modules.WerbeCounter120;
 import dev.janheist.newsaddon.modules.WerbeCounter90;
 import dev.janheist.newsaddon.timer.WerbeTimer;
+import dev.janheist.newsaddon.utls.TickEvent;
 import net.labymod.api.EventManager;
 import net.labymod.api.LabyModAddon;
 import net.labymod.main.LabyMod;
@@ -23,6 +24,7 @@ import java.net.URISyntaxException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Timer;
 
 public class NewsAddon extends LabyModAddon {
@@ -62,10 +64,22 @@ public class NewsAddon extends LabyModAddon {
         return socketConnection;
     }
     public static String lastContact = "none";
+    private static NewsAddon newsAddon;
+    private Random rand;
 
+    public static NewsAddon getInstance() {
+        return newsAddon;
+    }
+
+    public static Random getRandom() {
+        return newsAddon.rand;
+    }
 
     @Override
     public void onEnable() {
+        newsAddon = this;
+        newsAddon.rand = new Random();
+
         try {
           this.socketConnection = new SocketConnection(new URI(NewsAddon.ws));
         } catch (URISyntaxException e) {
@@ -110,6 +124,7 @@ public class NewsAddon extends LabyModAddon {
         this.scanner = false;
         this.scan_name = "";
 
+        getApi().registerForgeListener(new TickEvent());
 
         Timer timer = new Timer();
         timer.schedule(new WerbeTimer(this), 0, 1000);
@@ -164,5 +179,4 @@ public class NewsAddon extends LabyModAddon {
     public String getServer() {
         return LabyMod.getInstance().getCurrentServerData().getIp().toLowerCase();
     }
-
 }

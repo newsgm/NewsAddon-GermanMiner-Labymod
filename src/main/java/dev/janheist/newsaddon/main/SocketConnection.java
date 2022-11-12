@@ -92,6 +92,10 @@ public class SocketConnection extends WebSocketClient {
     }
 
     public void s(String msg) {
+        if (socket == null) {
+            connectSocket();
+            return;
+        }
         if(socket.authenticated) {
             try {
                 socket.send(msg.replace("§TOKEN§", socket.token));
