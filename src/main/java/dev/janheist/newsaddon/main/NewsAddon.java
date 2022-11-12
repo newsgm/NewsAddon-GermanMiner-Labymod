@@ -3,9 +3,7 @@ package dev.janheist.newsaddon.main;
 import dev.janheist.newsaddon.events.modifyMessage;
 import dev.janheist.newsaddon.events.onSend;
 import dev.janheist.newsaddon.events.userMenuAction;
-import dev.janheist.newsaddon.features.Dauerauftrag;
 import dev.janheist.newsaddon.features.PlayerUtilities;
-import dev.janheist.newsaddon.modules.UpdateChecker;
 import dev.janheist.newsaddon.modules.WerbeCounter120;
 import dev.janheist.newsaddon.modules.WerbeCounter90;
 import dev.janheist.newsaddon.timer.WerbeTimer;
@@ -18,10 +16,8 @@ import net.labymod.utils.Material;
 import net.minecraft.client.Minecraft;
 
 import java.io.File;
-import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -44,9 +40,6 @@ public class NewsAddon extends LabyModAddon {
     public boolean scanner;
     public static boolean ws_timeout = false;
 
-    public Dauerauftrag dauerauftrag = new Dauerauftrag(this);
-    private final PlayerUtilities pUtils = new PlayerUtilities();
-
     public boolean sound90;
     public String sound90ausw;
     public boolean sound120;
@@ -56,8 +49,6 @@ public class NewsAddon extends LabyModAddon {
     public boolean playermenu;
     public boolean autoconnectgm;
     public boolean isazubi;
-    public String daurl;
-    private boolean gotDA = false;
     public String last_scanned_name;
     public SocketConnection socketConnection;
     public SocketConnection getSocketConnection() {
@@ -66,6 +57,7 @@ public class NewsAddon extends LabyModAddon {
     public static String lastContact = "none";
     private static NewsAddon newsAddon;
     private Random rand;
+    private PlayerUtilities playerUtilities;
 
     public static NewsAddon getInstance() {
         return newsAddon;
@@ -75,10 +67,15 @@ public class NewsAddon extends LabyModAddon {
         return newsAddon.rand;
     }
 
+    public static PlayerUtilities getPlayerUtilities() {
+        return newsAddon.playerUtilities;
+    }
+
     @Override
     public void onEnable() {
         newsAddon = this;
         newsAddon.rand = new Random();
+        newsAddon.playerUtilities = new PlayerUtilities();
 
         try {
           this.socketConnection = new SocketConnection(new URI(NewsAddon.ws));
@@ -102,16 +99,7 @@ public class NewsAddon extends LabyModAddon {
                 if(autoconnectgm) {
                     getSocketConnection().connectSocket();
                 }
-                pUtils.resetCounter();
-                try {
-                    if (!gotDA) {
-                        gotDA = true;
-                        dauerauftrag.init();
-                        UpdateChecker.initialize(VERSION);
-                    }
-                } catch (IOException | ParseException e) {
-                    e.printStackTrace();
-                }
+                newsAddon.playerUtilities.resetCounter();
             }
         });
 
@@ -141,7 +129,6 @@ public class NewsAddon extends LabyModAddon {
         this.soundDAausw = getConfig().has("soundDAausw") ? getConfig().get("soundDAausw").getAsString() : "sirene_2";
         this.playermenu = !getConfig().has("playermenu") || getConfig().get("playermenu").getAsBoolean();
         this.autoconnectgm = !getConfig().has("autoconnectgm") || getConfig().get("autoconnectgm").getAsBoolean();
-        this.daurl = getConfig().has("daurl") ? getConfig().get("daurl").getAsString() : "http";
         this.isazubi = getConfig().has("isazubi") && getConfig().get("isazubi").getAsBoolean();
     }
 
@@ -149,9 +136,6 @@ public class NewsAddon extends LabyModAddon {
     protected void fillSettings(List<SettingsElement> list) {
         getSubSettings().add(new HeaderElement("§7§l[§a§lNEWS§7§l] §a§oAddon by"));
         getSubSettings().add(new HeaderElement("§b§l§oJan Heist aka. Mexykaner"));
-        getSubSettings().add(new HeaderElement(""));
-        getSubSettings().add(new HeaderElement("§a§lDaueraufträge"));
-        getSubSettings().add(new StringElement("Daten-URL", this, new ControlElement.IconData(Material.MOB_SPAWNER), "daurl", this.daurl));
         getSubSettings().add(new HeaderElement(""));
         getSubSettings().add(new HeaderElement("§a§lSounds"));
         getSubSettings().add(new BooleanElement("Nach 90 Werbetimer", this, new ControlElement.IconData(Material.WATCH), "sound90", this.sound90));

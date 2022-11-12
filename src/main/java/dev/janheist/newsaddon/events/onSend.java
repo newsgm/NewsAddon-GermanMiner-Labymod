@@ -1,5 +1,6 @@
 package dev.janheist.newsaddon.events;
 
+import dev.janheist.newsaddon.commands.daCommand;
 import dev.janheist.newsaddon.commands.newspmCommand;
 import dev.janheist.newsaddon.features.Auktionen;
 import dev.janheist.newsaddon.features.NewsAddonCommand;
@@ -17,12 +18,14 @@ public class onSend implements MessageSendEvent {
     Show sendInChat;
     NewsAddonCommand addonCommand;
     nfCommand nfcmd;
+    daCommand daCommand;
     newspmCommand newspm;
 
     public onSend(NewsAddon newsAddon) {
         this.newsAddon = newsAddon;
         this.addonCommand = new NewsAddonCommand(newsAddon);
         this.nfcmd = new nfCommand(newsAddon);
+        this.daCommand = new daCommand();
         this.sendInChat = new Show(newsAddon);
         this.newspm = new newspmCommand(newsAddon);
     }
@@ -77,6 +80,9 @@ public class onSend implements MessageSendEvent {
             } catch (NullPointerException ex) {
                 ex.printStackTrace();
             }
+            return true;
+        } else if (s.startsWith("/da")) {
+            daCommand.init(orig.replace("/da ", ""));
             return true;
         } else if (s.startsWith("/newspmr")) {
             newspm.init(orig.replace("/newspmr ", ("/newspm " + NewsAddon.lastContact + " ")));
