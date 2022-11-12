@@ -2,7 +2,6 @@ package dev.janheist.newsaddon.commands;
 
 import dev.janheist.newsaddon.features.PlayerUtilities;
 import dev.janheist.newsaddon.main.NewsAddon;
-import dev.janheist.newsaddon.utls.ClickableTexts;
 
 public class nfCommand {
 
@@ -15,7 +14,6 @@ public class nfCommand {
     public void init(String message) {
         try {
             String[] args = message.split(" ");
-
             if (args[1].equalsIgnoreCase("connect")) {
                 newsAddon.getSocketConnection().connectSocket();
             } else if (args[1].equalsIgnoreCase("close")) {
