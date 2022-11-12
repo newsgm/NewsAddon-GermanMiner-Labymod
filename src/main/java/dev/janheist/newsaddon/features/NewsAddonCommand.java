@@ -3,9 +3,6 @@ package dev.janheist.newsaddon.features;
 import dev.janheist.newsaddon.main.NewsAddon;
 import dev.janheist.newsaddon.modules.UpdateChecker;
 
-import java.io.IOException;
-import java.text.ParseException;
-
 public class NewsAddonCommand {
 
     PlayerUtilities pUtils = new PlayerUtilities();
@@ -108,13 +105,6 @@ public class NewsAddonCommand {
                 pUtils.displayPrefix("§a" + item);
             }
             pUtils.displayPrefix("");
-        } else if(args[1].equals("reload")) {
-            try {
-                newsAddon.dauerauftrag.init();
-                pUtils.displayPrefix("§aDAs zu " + newsAddon.das.size() + " Zeiten gespeichert.");
-            } catch (IOException | ParseException e) {
-                e.printStackTrace();
-            }
         } else if(args[1].equals("update")) {
             pUtils.displayPrefix("§aPrüfe in 10 Sekunden auf Updates. Sollte ein Update verfügbar sein, wirst du benachrichtigt.");
             UpdateChecker.initialize(NewsAddon.VERSION);

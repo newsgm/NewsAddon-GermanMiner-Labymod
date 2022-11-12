@@ -2,6 +2,7 @@ package dev.janheist.newsaddon.main;
 
 import dev.janheist.newsaddon.features.PlayerUtilities;
 import dev.janheist.newsaddon.modules.UpdateChecker;
+import dev.janheist.newsaddon.timer.DauerauftragTimer;
 import net.labymod.main.LabyMod;
 import net.minecraft.client.Minecraft;
 import org.java_websocket.client.WebSocketClient;
@@ -10,6 +11,12 @@ import org.java_websocket.handshake.ServerHandshake;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.Timer;
 
 public class SocketConnection extends WebSocketClient {
     public static SocketConnection socket;
@@ -34,6 +41,9 @@ public class SocketConnection extends WebSocketClient {
         if(s.startsWith("authSuccess")) {
             socket.token = s.split(" ")[1];
             socket.authenticated = true;
+
+            socket.s("da giveMeAllThousandTimedAdvertisements");
+
         } else if(s.startsWith("nf ")) {
             String user = s.split(" ")[1];
             String message = s.replace("nf " + user + " ", "");
@@ -60,8 +70,35 @@ public class SocketConnection extends WebSocketClient {
             pUtils.displayNormal("§c§l[N-PM] §a" + from + " §7> §c" + to + " §7»§f " + message);
 
         } else if (s.startsWith("versionCheck")) {
-            this.s("myVersion §TOKEN§ " + NewsAddon.VERSION);
-        } else {
+            this.s("myVersion " + NewsAddon.VERSION);
+        } else if (s.startsWith("currentServer")) {
+            this.s("myServer " + LabyMod.getInstance().getCurrentServerData().getIp());
+        } else if (s.startsWith("registerDA ")) {
+            String[] args = s.split(" ");
+            if (args.length < 1)
+                return;
+            String time = args[1];
+
+            try {
+                DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                String dateString = createDate() + " " + time + ":00";
+                Date date = dateFormatter.parse(dateString);
+
+                if (!NewsAddon.getInstance().das.contains(dateString)) {
+                    Timer daTimer = new Timer();
+                    daTimer.schedule(new DauerauftragTimer(), date);
+
+                    NewsAddon.getInstance().das.add(dateString);
+                    System.out.println("[NEWS-DEBUG] registered DA at " + dateString);
+                }
+            } catch (Exception ignored) { }
+        }
+
+
+
+
+
+        else {
             System.out.println("[NEWS-WS] Unknown msg: " + s);
         }
 
@@ -74,7 +111,7 @@ public class SocketConnection extends WebSocketClient {
         // 1006 = server offline gegangen
         if(i == 1006)
             NewsAddon.ws_timeout = true;
-        
+
         socket = null;
     }
 
@@ -92,10 +129,6 @@ public class SocketConnection extends WebSocketClient {
     }
 
     public void s(String msg) {
-        if (socket == null) {
-            connectSocket();
-            return;
-        }
         if(socket.authenticated) {
             try {
                 socket.send(msg.replace("§TOKEN§", socket.token));
@@ -120,5 +153,10 @@ public class SocketConnection extends WebSocketClient {
         socket.connect();
     }
 
+    private String createDate() {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDateTime now = LocalDateTime.now();
+        return dtf.format(now);
+    }
 
 }
