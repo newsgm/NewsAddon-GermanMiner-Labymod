@@ -73,7 +73,7 @@ public class UpdateChecker {
 
         TimeZone.getTimeZone("Europe/Berlin");
 
-        URL url = new URL("https://intern.news-redaktion.de/version.json");
+        URL url = new URL("https://raw.githubusercontent.com/newsgm/NewsAddon-GermanMiner-Labymod/main/src/main/resources/version.json");
 
         HttpsURLConnection con = (HttpsURLConnection) url.openConnection();
         con.setSSLSocketFactory(PlayerUtilities.getSocketFactory());
