@@ -60,7 +60,9 @@ public class SocketConnection extends WebSocketClient {
             pUtils.displayNormal("§c§l[N-PM] §a" + from + " §7> §c" + to + " §7»§f " + message);
 
         } else if (s.startsWith("versionCheck")) {
-            this.s("myVersion §TOKEN§ " + NewsAddon.VERSION);
+            this.s("myVersion " + NewsAddon.VERSION);
+        } else if (s.startsWith("currentServer")) {
+            this.s("myServer " + LabyMod.getInstance().getCurrentServerData().getIp());
         } else {
             System.out.println("[NEWS-WS] Unknown msg: " + s);
         }
