@@ -93,11 +93,6 @@ public class SocketConnection extends WebSocketClient {
                 }
             } catch (Exception ignored) { }
         }
-
-
-
-
-
         else {
             System.out.println("[NEWS-WS] Unknown msg: " + s);
         }
@@ -118,7 +113,7 @@ public class SocketConnection extends WebSocketClient {
     @Override
     public void onError(Exception e) {
         socket = null;
-        pUtils.displayNormal("§c§l[N-CHAT] §a§oPeppi §7»§f§o Ich konnte dich nicht mit dem Server verbinden. Versuche es später noch einmal mit /newsaddon connect");
+        pUtils.displayNormal("§c§l[N-CHAT] §a§oPeppi §7»§f§o Ich konnte dich nicht mit dem Server verbinden. Versuche es später noch einmal mit /nf connect");
 
     }
 
