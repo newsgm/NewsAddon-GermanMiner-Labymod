@@ -1,4 +1,4 @@
-package dev.janheist.newsaddon.utls;
+package dev.janheist.newsaddon.utls.ClickableTexts;
 
 import net.labymod.main.LabyMod;
 import net.minecraft.client.Minecraft;

@@ -7,7 +7,7 @@ import dev.janheist.newsaddon.features.PlayerUtilities;
 import dev.janheist.newsaddon.modules.WerbeCounter120;
 import dev.janheist.newsaddon.modules.WerbeCounter90;
 import dev.janheist.newsaddon.timer.WerbeTimer;
-import dev.janheist.newsaddon.utls.TickEvent;
+import dev.janheist.newsaddon.utls.ClickableTexts.TickEvent;
 import net.labymod.api.EventManager;
 import net.labymod.api.LabyModAddon;
 import net.labymod.main.LabyMod;

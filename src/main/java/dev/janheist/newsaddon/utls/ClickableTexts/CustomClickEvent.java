@@ -1,4 +1,4 @@
-package dev.janheist.newsaddon.utls;
+package dev.janheist.newsaddon.utls.ClickableTexts;
 
 import com.google.common.hash.Hashing;
 import dev.janheist.newsaddon.main.NewsAddon;

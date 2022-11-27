@@ -1,4 +1,4 @@
-package dev.janheist.newsaddon.utls;
+package dev.janheist.newsaddon.utls.ClickableTexts;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiChat;
