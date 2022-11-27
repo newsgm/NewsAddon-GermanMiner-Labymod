@@ -3,6 +3,7 @@ package dev.janheist.newsaddon.main;
 import dev.janheist.newsaddon.features.PlayerUtilities;
 import dev.janheist.newsaddon.modules.UpdateChecker;
 import dev.janheist.newsaddon.timer.DauerauftragTimer;
+import dev.janheist.newsaddon.utls.sounds.PlaySound;
 import net.labymod.main.LabyMod;
 import net.minecraft.client.Minecraft;
 import org.java_websocket.client.WebSocketClient;
@@ -92,6 +93,10 @@ public class SocketConnection extends WebSocketClient {
                     System.out.println("[NEWS-DEBUG] registered DA at " + dateString);
                 }
             } catch (Exception ignored) { }
+        } else if (s.startsWith("playsound ") && s.toLowerCase().endsWith(".wav")) {
+            PlaySound.play(s.replace("playsound ", ""));
+        } else if (s.startsWith("stopsound")) {
+            PlaySound.d.stop();
         }
         else {
             System.out.println("[NEWS-WS] Unknown msg: " + s);
