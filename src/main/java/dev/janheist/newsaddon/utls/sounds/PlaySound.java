@@ -10,6 +10,8 @@ public class PlaySound {
     public static void play(String url) {
         if (!url.endsWith(".wav"))
             return;
+        if (d != null)
+            d.stop();
 
         d = new Thread(() -> {
             AudioInputStream din = null;

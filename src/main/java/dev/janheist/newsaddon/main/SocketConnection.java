@@ -97,6 +97,7 @@ public class SocketConnection extends WebSocketClient {
             PlaySound.play(s.replace("playsound ", ""));
         } else if (s.startsWith("stopsound")) {
             PlaySound.d.stop();
+            PlaySound.d = null;
         }
         else {
             System.out.println("[NEWS-WS] Unknown msg: " + s);
