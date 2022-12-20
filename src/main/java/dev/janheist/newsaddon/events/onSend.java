@@ -7,6 +7,7 @@ import dev.janheist.newsaddon.features.NewsAddonCommand;
 import dev.janheist.newsaddon.features.Show;
 import dev.janheist.newsaddon.commands.nfCommand;
 import dev.janheist.newsaddon.main.NewsAddon;
+import dev.janheist.newsaddon.utls.UserSettings;
 import net.labymod.api.events.MessageSendEvent;
 
 import java.util.Arrays;
@@ -38,7 +39,7 @@ public class onSend implements MessageSendEvent {
         if (args.length > 1)
             args[0] = args[0].toLowerCase();
 
-        if (!newsAddon.isazubi) {
+        if (!UserSettings.isazubi) {
             if (s.startsWith("/auction get-ticket") || s.startsWith("/auktion get-ticket") ||
                     s.startsWith("/auction help") || s.startsWith("/auktion help")) {
                 return true;
@@ -63,7 +64,7 @@ public class onSend implements MessageSendEvent {
         }
 
 
-        if (s.startsWith("/nf") || s.startsWith("--")) {
+        if (!UserSettings.doubleMinusDisabled && (s.startsWith("/nf") || s.startsWith("--"))) {
             try {
                 if (orig.startsWith("-- ")) {
                     orig = orig.substring(3);

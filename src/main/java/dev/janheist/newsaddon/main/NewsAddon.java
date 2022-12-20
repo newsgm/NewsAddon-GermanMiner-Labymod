@@ -8,6 +8,7 @@ import dev.janheist.newsaddon.modules.WerbeCounter120;
 import dev.janheist.newsaddon.modules.WerbeCounter90;
 import dev.janheist.newsaddon.timer.WerbeTimer;
 import dev.janheist.newsaddon.utls.ClickableTexts.TickEvent;
+import dev.janheist.newsaddon.utls.UserSettings;
 import net.labymod.api.EventManager;
 import net.labymod.api.LabyModAddon;
 import net.labymod.main.LabyMod;
@@ -25,7 +26,7 @@ import java.util.Timer;
 
 public class NewsAddon extends LabyModAddon {
 
-    public static final int VERSION = 15;
+    public static final int VERSION = 16;
     public static String ws = "ws://janheist.dev:8181";
 
     // Vor Release auf false setzen!
@@ -40,16 +41,6 @@ public class NewsAddon extends LabyModAddon {
     public boolean scanner;
     public static boolean ws_timeout = false;
 
-    public boolean sound90;
-    public String sound90ausw;
-    public boolean sound120;
-    public String sound120ausw;
-    public boolean soundDA;
-    public String soundDAausw;
-    public boolean playermenu;
-    public boolean autoconnectgm;
-    public boolean isazubi;
-    public String last_scanned_name;
     public SocketConnection socketConnection;
     public SocketConnection getSocketConnection() {
         return socketConnection;
@@ -96,7 +87,7 @@ public class NewsAddon extends LabyModAddon {
         eventManager.register(new userMenuAction(this));
         eventManager.registerOnJoin(serverData -> {
             if (serverData.getIp().toLowerCase().contains("germanminer") || DEBUGMODE) {
-                if(autoconnectgm) {
+                if(UserSettings.autoconnectgm) {
                     getSocketConnection().connectSocket();
                 }
                 newsAddon.playerUtilities.resetCounter();
@@ -121,15 +112,16 @@ public class NewsAddon extends LabyModAddon {
 
     @Override
     public void loadConfig() {
-        this.sound90 = !getConfig().has("sound90") || getConfig().get("sound90").getAsBoolean();
-        this.sound90ausw = getConfig().has("sound90ausw") ? getConfig().get("sound90ausw").getAsString() : "block.note.harp";
-        this.sound120 = !getConfig().has("sound120") || getConfig().get("sound120").getAsBoolean();
-        this.sound120ausw = getConfig().has("sound120ausw") ? getConfig().get("sound120ausw").getAsString() : "block.note.pling";
-        this.soundDA = !getConfig().has("soundDA") || getConfig().get("soundDA").getAsBoolean();
-        this.soundDAausw = getConfig().has("soundDAausw") ? getConfig().get("soundDAausw").getAsString() : "sirene_2";
-        this.playermenu = !getConfig().has("playermenu") || getConfig().get("playermenu").getAsBoolean();
-        this.autoconnectgm = !getConfig().has("autoconnectgm") || getConfig().get("autoconnectgm").getAsBoolean();
-        this.isazubi = getConfig().has("isazubi") && getConfig().get("isazubi").getAsBoolean();
+        UserSettings.sound90 = !getConfig().has("sound90") || getConfig().get("sound90").getAsBoolean();
+        UserSettings.sound90ausw = getConfig().has("sound90ausw") ? getConfig().get("sound90ausw").getAsString() : "block.note.harp";
+        UserSettings.sound120 = !getConfig().has("sound120") || getConfig().get("sound120").getAsBoolean();
+        UserSettings.sound120ausw = getConfig().has("sound120ausw") ? getConfig().get("sound120ausw").getAsString() : "block.note.pling";
+        UserSettings.soundDA = !getConfig().has("soundDA") || getConfig().get("soundDA").getAsBoolean();
+        UserSettings.soundDAausw = getConfig().has("soundDAausw") ? getConfig().get("soundDAausw").getAsString() : "sirene_2";
+        UserSettings.playermenu = !getConfig().has("playermenu") || getConfig().get("playermenu").getAsBoolean();
+        UserSettings.autoconnectgm = !getConfig().has("autoconnectgm") || getConfig().get("autoconnectgm").getAsBoolean();
+        UserSettings.isazubi = getConfig().has("isazubi") && getConfig().get("isazubi").getAsBoolean();
+        UserSettings.doubleMinusDisabled = getConfig().has("doubleMinusDisabled") && getConfig().get("doubleMinusDisabled").getAsBoolean();
     }
 
     @Override
@@ -138,21 +130,24 @@ public class NewsAddon extends LabyModAddon {
         getSubSettings().add(new HeaderElement("§b§l§oJan Heist aka. Mexykaner"));
         getSubSettings().add(new HeaderElement(""));
         getSubSettings().add(new HeaderElement("§a§lSounds"));
-        getSubSettings().add(new BooleanElement("Nach 90 Werbetimer", this, new ControlElement.IconData(Material.WATCH), "sound90", this.sound90));
-        getSubSettings().add(new StringElement("Sound bei 90 Sekunden", this, new ControlElement.IconData(Material.MOB_SPAWNER), "sound90ausw", this.sound90ausw));
-        getSubSettings().add(new BooleanElement("Nach 120 Werbetimer", this, new ControlElement.IconData(Material.WATCH), "sound120", this.sound120));
-        getSubSettings().add(new StringElement("Sound bei 120 Sekunden", this, new ControlElement.IconData(Material.MOB_SPAWNER), "sound120ausw", this.sound120ausw));
-        getSubSettings().add(new BooleanElement("Bei Dauerauftrag", this, new ControlElement.IconData(Material.PAPER), "soundDA", this.soundDA));
-        getSubSettings().add(new StringElement( "Sound wenn ein DA ansteht", this, new ControlElement.IconData( Material.MOB_SPAWNER ), "soundDAausw", this.soundDAausw ) );
+        getSubSettings().add(new BooleanElement("Nach 90 Werbetimer", this, new ControlElement.IconData(Material.WATCH), "sound90", UserSettings.sound90));
+        getSubSettings().add(new StringElement("Sound bei 90 Sekunden", this, new ControlElement.IconData(Material.MOB_SPAWNER), "sound90ausw", UserSettings.sound90ausw));
+        getSubSettings().add(new BooleanElement("Nach 120 Werbetimer", this, new ControlElement.IconData(Material.WATCH), "sound120", UserSettings.sound120));
+        getSubSettings().add(new StringElement("Sound bei 120 Sekunden", this, new ControlElement.IconData(Material.MOB_SPAWNER), "sound120ausw", UserSettings.sound120ausw));
+        getSubSettings().add(new BooleanElement("Bei Dauerauftrag", this, new ControlElement.IconData(Material.PAPER), "soundDA", UserSettings.soundDA));
+        getSubSettings().add(new StringElement( "Sound wenn ein DA ansteht", this, new ControlElement.IconData( Material.MOB_SPAWNER ), "soundDAausw", UserSettings.soundDAausw ) );
         getSubSettings().add(new HeaderElement(""));
         getSubSettings().add(new HeaderElement("§a§lSpielermenü"));
-        getSubSettings().add(new BooleanElement("An = Aktiv", this, new ControlElement.IconData(Material.SKULL_ITEM), "playermenu", this.playermenu));
+        getSubSettings().add(new BooleanElement("An = Aktiv", this, new ControlElement.IconData(Material.SKULL_ITEM), "playermenu", UserSettings.playermenu));
         getSubSettings().add(new HeaderElement(""));
         getSubSettings().add(new HeaderElement("§a§lRangauswahl"));
-        getSubSettings().add(new BooleanElement("Azubi", this, new ControlElement.IconData(Material.NAME_TAG), "isazubi", this.isazubi));
+        getSubSettings().add(new BooleanElement("Azubi", this, new ControlElement.IconData(Material.NAME_TAG), "isazubi", UserSettings.isazubi));
         getSubSettings().add(new HeaderElement(""));
         getSubSettings().add(new HeaderElement("§a§lWebSocket"));
-        getSubSettings().add(new BooleanElement("An = AutoConnect GM", this, new ControlElement.IconData(Material.REDSTONE_LAMP_ON), "autoconnectgm", this.autoconnectgm));
+        getSubSettings().add(new BooleanElement("An = AutoConnect GM", this, new ControlElement.IconData(Material.REDSTONE_LAMP_ON), "autoconnectgm", UserSettings.autoconnectgm));
+        getSubSettings().add(new HeaderElement(""));
+        getSubSettings().add(new HeaderElement("§a§lDoppelMinus im Chat deaktivieren"));
+        getSubSettings().add(new BooleanElement("An = Deaktiviert!", this, new ControlElement.IconData(Material.REDSTONE_LAMP_ON), "doubleMinusDisabled", UserSettings.doubleMinusDisabled));
     }
 
     public void resetSeconds() {

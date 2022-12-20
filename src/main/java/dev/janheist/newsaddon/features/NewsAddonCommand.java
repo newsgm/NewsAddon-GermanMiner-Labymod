@@ -2,6 +2,7 @@ package dev.janheist.newsaddon.features;
 
 import dev.janheist.newsaddon.main.NewsAddon;
 import dev.janheist.newsaddon.modules.UpdateChecker;
+import dev.janheist.newsaddon.utls.UserSettings;
 
 public class NewsAddonCommand {
 
@@ -88,7 +89,7 @@ public class NewsAddonCommand {
             if(!(args.length > 2)) {
                 pUtils.displayPrefix("§e/newsaddon scan [Name,stop]");
             } else {
-                if(args[2].equalsIgnoreCase("stop") || (args[2].equalsIgnoreCase(newsAddon.last_scanned_name) && newsAddon.scanner)) {
+                if(args[2].equalsIgnoreCase("stop") || (args[2].equalsIgnoreCase(UserSettings.last_scanned_name) && newsAddon.scanner)) {
                     newsAddon.scan_name = null;
                     newsAddon.scanner = false;
                     pUtils.displayPrefix("§cScanner aus");
@@ -96,7 +97,7 @@ public class NewsAddonCommand {
                     newsAddon.scan_name = args[2];
                     newsAddon.scanner = true;
                     pUtils.displayPrefix("§aScanne nun " + args[2]);
-                    newsAddon.last_scanned_name = args[2];
+                    UserSettings.last_scanned_name = args[2];
                 }
             }
         } else if(args[1].equals("da") || args[1].startsWith("dauerauftr")) {

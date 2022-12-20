@@ -1,6 +1,7 @@
 package dev.janheist.newsaddon.features;
 
 import dev.janheist.newsaddon.main.NewsAddon;
+import dev.janheist.newsaddon.utls.UserSettings;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextComponentString;
@@ -31,7 +32,7 @@ public class Show {
             args[args.length-1] = args[args.length-1].toLowerCase();
             newsAddon.scan_name = args[args.length-1];
             newsAddon.scanner = true;
-            newsAddon.last_scanned_name = args[args.length-1];
+            UserSettings.last_scanned_name = args[args.length-1];
 
         } else if(message.toLowerCase().startsWith("types")) {
             pUtils.sendAsPlayer("Welche Art von Werbung möchtest du schalten? Chatwerbung (350€), Actionbarwerbung (350€), Appwerbung (1120€) oder Zeitungswerbung?");

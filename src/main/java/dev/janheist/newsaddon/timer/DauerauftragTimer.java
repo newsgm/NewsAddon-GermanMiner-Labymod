@@ -2,6 +2,7 @@ package dev.janheist.newsaddon.timer;
 
 import dev.janheist.newsaddon.features.PlayerUtilities;
 import dev.janheist.newsaddon.main.NewsAddon;
+import dev.janheist.newsaddon.utls.UserSettings;
 import net.labymod.core.LabyModCore;
 import net.labymod.main.LabyMod;
 import net.minecraft.client.Minecraft;
@@ -16,17 +17,17 @@ public class DauerauftragTimer extends TimerTask {
     public void run() {
         try {
             if (
-                !NewsAddon.getInstance().isazubi &&
+                !UserSettings.isazubi &&
                 (NewsAddon.getInstance().DEBUGMODE || LabyMod.getInstance().getCurrentServerData().getIp().toLowerCase().contains("germanminer"))
             ) {
                 PlayerUtilities pUtils = new PlayerUtilities();
                 pUtils.displayPrefix("§a§lEventuell muss ein Dauerauftrag geschaltet werden!");
 
                 if (!NewsAddon.getInstance().getConfig().has("soundDA") || NewsAddon.getInstance().getConfig().get("soundDA").getAsBoolean()) {
-                    if (NewsAddon.getInstance().soundDAausw.equalsIgnoreCase("sirene_2")) {
+                    if (UserSettings.soundDAausw.equalsIgnoreCase("sirene_2")) {
                         Minecraft.getMinecraft().player.playSound(new SoundEvent(new ResourceLocation("sirene_2")), 0.25F, 1.0F);
                     } else {
-                        LabyModCore.getMinecraft().playSound(new ResourceLocation(NewsAddon.getInstance().soundDAausw), 1.0F);
+                        LabyModCore.getMinecraft().playSound(new ResourceLocation(UserSettings.soundDAausw), 1.0F);
                     }
                 }
             }

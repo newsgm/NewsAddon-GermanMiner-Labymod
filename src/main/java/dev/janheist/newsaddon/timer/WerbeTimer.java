@@ -3,6 +3,7 @@ package dev.janheist.newsaddon.timer;
 import dev.janheist.newsaddon.main.NewsAddon;
 import dev.janheist.newsaddon.modules.WerbeCounter120;
 import dev.janheist.newsaddon.modules.WerbeCounter90;
+import dev.janheist.newsaddon.utls.UserSettings;
 import net.labymod.core.LabyModCore;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.FMLLog;
@@ -31,14 +32,14 @@ public class WerbeTimer extends TimerTask {
             if (newsAddon.seconds90 == 90) {
                 WerbeCounter90.allowed = 1;
                 newsAddon.seconds90 = 0;
-                if (newsAddon.DEBUGMODE || (newsAddon.sound90 && newsAddon.getServer().contains("germanminer")))
-                    LabyModCore.getMinecraft().playSound(new ResourceLocation(newsAddon.sound90ausw), 1.0F);
+                if (newsAddon.DEBUGMODE || (UserSettings.sound90 && newsAddon.getServer().contains("germanminer")))
+                    LabyModCore.getMinecraft().playSound(new ResourceLocation(UserSettings.sound90ausw), 1.0F);
             }
             if (newsAddon.seconds120 == 120) {
                 WerbeCounter120.allowed = 1;
                 newsAddon.seconds120 = 0;
-                if (newsAddon.DEBUGMODE || (newsAddon.sound120 && newsAddon.getServer().contains("germanminer")))
-                    LabyModCore.getMinecraft().playSound(new ResourceLocation(newsAddon.sound120ausw), 1.0F);
+                if (newsAddon.DEBUGMODE || (UserSettings.sound120 && newsAddon.getServer().contains("germanminer")))
+                    LabyModCore.getMinecraft().playSound(new ResourceLocation(UserSettings.sound120ausw), 1.0F);
             }
         } catch (NullPointerException ex) {
             System.out.println("[NEWS-DEBUG] NullPointerException at WerbeTimer");
