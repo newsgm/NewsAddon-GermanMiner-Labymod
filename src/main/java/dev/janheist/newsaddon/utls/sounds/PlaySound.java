@@ -16,11 +16,7 @@ public class PlaySound {
         d = new Thread(() -> {
             AudioInputStream din = null;
             try {
-                AudioInputStream in = AudioSystem.getAudioInputStream(new URL(url).openConnection().getInputStream());
-
-                // avoid 403 error
-
-
+                AudioInputStream in = AudioSystem.getAudioInputStream(new URL(url));
                 AudioFormat baseFormat = in.getFormat();
                 AudioFormat decodedFormat = new AudioFormat(
                         AudioFormat.Encoding.PCM_SIGNED,
