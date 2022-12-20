@@ -147,7 +147,7 @@ public class NewsAddon extends LabyModAddon {
         getSubSettings().add(new BooleanElement("An = AutoConnect GM", this, new ControlElement.IconData(Material.REDSTONE_LAMP_ON), "autoconnectgm", UserSettings.autoconnectgm));
         getSubSettings().add(new HeaderElement(""));
         getSubSettings().add(new HeaderElement("§a§lDoppelMinus im Chat deaktivieren"));
-        getSubSettings().add(new BooleanElement("An = Deaktiviert!", this, new ControlElement.IconData(Material.REDSTONE_LAMP_ON), "doubleMinusDisabled", UserSettings.doubleMinusDisabled));
+        getSubSettings().add(new BooleanElement("An = Deaktiviert!", this, new ControlElement.IconData(Material.REDSTONE_BLOCK), "doubleMinusDisabled", UserSettings.doubleMinusDisabled));
     }
 
     public void resetSeconds() {
