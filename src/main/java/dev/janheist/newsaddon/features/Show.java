@@ -34,7 +34,7 @@ public class Show {
             newsAddon.last_scanned_name = args[args.length-1];
 
         } else if(message.toLowerCase().startsWith("types")) {
-            pUtils.sendAsPlayer("Welche Art von Werbung möchtest du schalten? Chatwerbung (350€), Actionbarwerbung (350€), Appwerbung (1120€) oder Zeitungswerbung?");
+            pUtils.sendAsPlayer("Welche Art von Werbung möchtest du schalten? Chatwerbung (350€), Actionbarwerbung (200€), Appwerbung (1120€) oder Zeitungswerbung?");
         } else if(message.toLowerCase().startsWith("chat")) {
             pUtils.sendAsPlayer("Dann bekomme ich bitte den Text und 350€");
         } else {
